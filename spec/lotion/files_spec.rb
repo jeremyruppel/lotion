@@ -6,5 +6,6 @@ describe Lotion do
   let( :path ){ File.expand_path( File.join( __FILE__, '../../..' ) ) }
 
   it { should include( "#{path}/lib/lotion.rb" ) }
+  it { should include( "#{path}/lib/lotion/concern.rb" ) }
   it { should include( "#{path}/lib/lotion/version.rb" ) }
 end
