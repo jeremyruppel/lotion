@@ -1,8 +1,12 @@
 # Lotion
 
-TODO: Write a gem description
+This library is a work in progress. Hit that "watch" button, son!
 
 ## Installation
+
+RubyMotion projects don't come with a Gemfile by default. Create one:
+
+    bundle init
 
 Add this line to your application's Gemfile:
 
@@ -15,6 +19,13 @@ And then execute:
 Or install it yourself as:
 
     $ gem install lotion
+
+Finally, include Lotion in your project by adding the following to your Rakefile:
+
+    require 'bundler'
+    Bundler.require
+
+
 
 ## Usage
 
