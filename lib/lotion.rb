@@ -1,5 +1,6 @@
 require "lotion/version"
 
 module Lotion
-  # Your code goes here...
+
+  FILES = Dir[ File.expand_path( File.join( __FILE__, '../**/*.rb' ) ) ].sort.freeze
 end
