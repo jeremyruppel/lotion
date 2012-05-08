@@ -14,4 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "lotion"
   gem.require_paths = ["lib"]
   gem.version       = Lotion::VERSION
+
+  gem.add_development_dependency 'rspec', '>= 2.10.0'
 end
