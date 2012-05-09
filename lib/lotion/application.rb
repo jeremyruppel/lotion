@@ -1,3 +1,5 @@
+# require concern
+
 module Lotion
   module Application
     extend Lotion::Concern
