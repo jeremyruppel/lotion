@@ -32,7 +32,21 @@ Finally, include Lotion in your project by adding the following to your Rakefile
 
 ## Usage
 
-TODO: Write usage instructions here
+### Application
+
+The `Application` module removes boilerplate code that would typically exist in the app delegate.
+
+``` rb
+class AppDelegate
+  include Lotion::Application
+
+  on :loaded do
+    # the app has loaded!
+    # you may also access the `application` and
+    # `launchOptions` arguments to this block if desired
+  end
+end
+```
 
 ## Contributing
 
