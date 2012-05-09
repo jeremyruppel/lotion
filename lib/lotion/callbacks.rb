@@ -19,7 +19,7 @@ module Lotion
         end
       end
 
-      protected
+      # protected
 
       def callbacks
         @callbacks ||= Hash.new { |h, k| h[ k ] = [ ] }
