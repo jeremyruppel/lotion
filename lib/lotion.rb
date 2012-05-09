@@ -14,5 +14,6 @@ module Lotion
   end
 
   autoload :Application, 'lotion/application'
+  autoload :Callbacks,   'lotion/callbacks'
   autoload :Concern,     'lotion/concern'
 end
