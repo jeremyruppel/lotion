@@ -22,10 +22,13 @@ Or install it yourself as:
 
 Finally, include Lotion in your project by adding the following to your Rakefile:
 
+    # after require 'motion/project'
     require 'bundler'
     Bundler.require
 
-
+    # inside app setup
+    app.files += Lotion::Dependencies( __FILE__ )
+    app.files_dependencies 'app/app_delegate.rb' => Lotion::Dependencies( __FILE__ )
 
 ## Usage
 
