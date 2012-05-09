@@ -11,6 +11,9 @@ module Lotion
       end
 
       def trigger( event, *args )
+        if self.class.respond_to? :trigger
+          self.class.trigger event, *args
+        end
         callbacks[ event ].each do |block|
           block.call *args
         end
