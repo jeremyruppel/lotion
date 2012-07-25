@@ -16,4 +16,8 @@ module Lotion
   autoload :Application, 'lotion/application'
   autoload :Callbacks,   'lotion/callbacks'
   autoload :Concern,     'lotion/concern'
+
+  # ___________________ legs ___________________
+
+  autoload :Injector, 'lotion/injector'
 end
