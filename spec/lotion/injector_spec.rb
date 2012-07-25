@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Lotion::Injector do
 
-  describe 'map' do
+  describe 'mapping injections' do
     class Foo; end
     class Bar; end
 
@@ -151,6 +151,55 @@ describe Lotion::Injector do
       end
       it 'should map bar' do
         subject.get( :bar ).should be_a( Bar )
+      end
+    end
+  end
+
+  describe 'injecting into classes' do
+    class Foo; end
+    class Bar; end
+    class Baz; end
+
+    let( :injector ){ Class.new(described_class) do
+      map Foo
+      map Bar
+    end.new }
+
+    describe 'mapped injections' do
+      subject { Class.new do
+        include Lotion::Injection
+
+        inject :my_foo => Foo
+        inject :my_bar => Bar
+      end.new }
+
+      before { injector.inject_into( subject ) }
+
+      its( :my_foo ){ should be_a( Foo ) }
+      its( :my_bar ){ should be_a( Bar ) }
+    end
+
+    describe 'unmapped injections' do
+      subject { Class.new do
+        include Lotion::Injection
+
+        inject :my_foo => Baz
+      end.new }
+
+      it 'should raise an exception' do
+        expect {
+          injector.inject_into( subject )
+        }.to raise_error( Lotion::InjectionError, 'No injection mapping found for "Baz"' )
+      end
+    end
+
+    describe 'a class that is not Lotion::Injectable' do
+      subject { Object.new }
+
+      it 'should raise an exception' do
+        expect {
+          injector.inject_into( subject )
+        }.to raise_error( Lotion::InjectionError, 'Cannot inject into objects that do not include Lotion::Injection' )
       end
     end
   end

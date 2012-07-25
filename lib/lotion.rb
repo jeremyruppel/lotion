@@ -20,4 +20,7 @@ module Lotion
   # ___________________ legs ___________________
 
   autoload :Injector, 'lotion/injector'
+
+  class LotionError < StandardError; end
+  class InjectionError < LotionError; end
 end

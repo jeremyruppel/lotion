@@ -85,6 +85,7 @@ module Lotion
     end
 
     def initialize # :nodoc:
+      # TODO refactor into a class-level utility method
       @mappings = self.class.mappings.dup.freeze
     end
 
@@ -93,9 +94,57 @@ module Lotion
     def get( mapping, options={} )
       case value = @mappings[ mapping ]
       when NilClass
-        raise 'ZOMG NEED TO TEST THIS EXCEPTION'
+        raise InjectionError, %Q{No injection mapping found for "#{mapping}"}
       when InjectionMapping
         options[ :new ] ? value.new : value.get
+      end
+    end
+
+    ##
+    #
+    def inject_into( object )
+      if object.is_a?( Injection )
+        object.fill_injection_points self
+      else
+        raise InjectionError, 'Cannot inject into objects that do not include Lotion::Injection'
+      end
+    end
+  end
+
+  ##
+  #
+  module Injection
+    extend Lotion::Concern
+
+    def initialize # :nodoc:
+      # TODO refactor into a class-level utility method
+      @injection_points = self.class.injection_points.dup.freeze
+      super
+    end
+
+    ##
+    #
+    def fill_injection_points( injector )
+      @injection_points.each_pair do |key, value|
+        instance_variable_set :"@#{key}", injector.get( value )
+      end
+    end
+
+    module ClassMethods
+
+      ##
+      #
+      def inject( hash )
+        hash.each_pair do |key, value|
+          attr_reader key
+          injection_points[ key ] = value
+        end
+      end
+
+      ##
+      #
+      def injection_points
+        @injection_points ||= { }
       end
     end
   end
