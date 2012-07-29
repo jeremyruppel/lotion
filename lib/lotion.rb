@@ -18,6 +18,7 @@ module Lotion
 
   # ___________________ legs ___________________
 
+  autoload :Command,   'lotion/command'
   autoload :Concern,   'lotion/concern'
   autoload :Injector,  'lotion/injector'
   autoload :Prototype, 'lotion/prototype'
