@@ -15,11 +15,12 @@ module Lotion
 
   autoload :Application, 'lotion/application'
   autoload :Callbacks,   'lotion/callbacks'
-  autoload :Concern,     'lotion/concern'
 
   # ___________________ legs ___________________
 
-  autoload :Injector, 'lotion/injector'
+  autoload :Concern,   'lotion/concern'
+  autoload :Injector,  'lotion/injector'
+  autoload :Prototype, 'lotion/prototype'
 
   class LotionError < StandardError; end
   class InjectionError < LotionError; end
