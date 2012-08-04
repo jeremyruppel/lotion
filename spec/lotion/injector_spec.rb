@@ -6,11 +6,11 @@ describe Lotion::Injector do
     class Foo; end
     class Bar; end
 
-    let( :injector ){ Class.new(described_class) }
+    let( :injector ){ described_class.new }
 
     describe 'implied class' do
       before  { injector.map Foo }
-      subject { injector.new }
+      subject { injector }
 
       it 'should instantiate the mapped class' do
         subject.get( Foo ).should be_a( Foo )
@@ -26,7 +26,7 @@ describe Lotion::Injector do
 
     describe 'class keyed by class' do
       before  { injector.map Foo => Foo }
-      subject { injector.new }
+      subject { injector }
 
       it 'should instantiate the mapped class' do
         subject.get( Foo ).should be_a( Foo )
@@ -42,7 +42,7 @@ describe Lotion::Injector do
 
     describe 'class keyed by symbol' do
       before  { injector.map :foo_name => Foo }
-      subject { injector.new }
+      subject { injector }
 
       it 'should instantiate the mapped class' do
         subject.get( :foo_name ).should be_a( Foo )
@@ -60,7 +60,7 @@ describe Lotion::Injector do
       let( :instance ){ Foo.new }
 
       before  { injector.map instance }
-      subject { injector.new }
+      subject { injector }
 
       it 'should hand back the mapped instance' do
         subject.get( Foo ).should be( instance )
@@ -78,7 +78,7 @@ describe Lotion::Injector do
       let( :instance ){ Foo.new }
 
       before  { injector.map Foo => instance }
-      subject { injector.new }
+      subject { injector }
 
       it 'should hand back the mapped instance' do
         subject.get( Foo ).should be( instance )
@@ -96,7 +96,7 @@ describe Lotion::Injector do
       let( :instance ){ Foo.new }
 
       before  { injector.map :foo_name => instance }
-      subject { injector.new }
+      subject { injector }
 
       it 'should hand back the mapped instance' do
         subject.get( :foo_name ).should be( instance )
@@ -112,7 +112,7 @@ describe Lotion::Injector do
 
     describe 'block keyed by class' do
       before  { injector.map Foo => lambda { Foo.new } }
-      subject { injector.new }
+      subject { injector }
 
       it 'should hand back the result of the block' do
         subject.get( Foo ).should be_a( Foo )
@@ -128,7 +128,7 @@ describe Lotion::Injector do
 
     describe 'block keyed by symbol' do
       before  { injector.map :foo_name => lambda { Foo.new } }
-      subject { injector.new }
+      subject { injector }
 
       it 'should hand back the result of the block' do
         subject.get( :foo_name ).should be_a( Foo )
@@ -144,7 +144,7 @@ describe Lotion::Injector do
 
     describe 'multiple' do
       before  { injector.map Foo, :bar => Bar }
-      subject { injector.new }
+      subject { injector }
 
       it 'should map foo' do
         subject.get( Foo ).should be_a( Foo )
@@ -160,14 +160,16 @@ describe Lotion::Injector do
     class Bar; end
     class Baz; end
 
-    let( :injector ){ Class.new(described_class) do
-      map Foo
-      map Bar
-    end.new }
+    let( :injector ){ described_class.new }
+
+    before do
+      injector.map Foo
+      injector.map Bar
+    end
 
     describe 'mapped injections' do
       subject { Class.new do
-        include Lotion::Injection
+        include Lotion::Injectable
 
         inject :my_foo => Foo
         inject :my_bar => Bar
@@ -181,7 +183,7 @@ describe Lotion::Injector do
 
     describe 'unmapped injections' do
       subject { Class.new do
-        include Lotion::Injection
+        include Lotion::Injectable
 
         inject :my_foo => Baz
       end.new }
@@ -199,7 +201,7 @@ describe Lotion::Injector do
       it 'should raise an exception' do
         expect {
           injector.inject_into( subject )
-        }.to raise_error( Lotion::InjectionError, 'Cannot inject into objects that do not include Lotion::Injection' )
+        }.to raise_error( Lotion::InjectionError, 'Cannot inject into objects that do not include Lotion::Injectable' )
       end
     end
   end

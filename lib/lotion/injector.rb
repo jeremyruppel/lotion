@@ -1,3 +1,5 @@
+# require injectable
+
 module Lotion
 
   ##
@@ -46,53 +48,27 @@ module Lotion
   #
   class Injector
 
-    class << self
-
-      ##
-      #
-      def map( *args )
-        args.each do |mapping|
-          case mapping
-          when Class
-            _map mapping, mapping
-          when Hash
-            mapping.each do |key, value|
-              _map key, value
-            end
-          when Object
-            _map mapping.class, mapping
-          end
-        end
-      end
-
-      # TODO test that injector inheritance is working as expected
-      def mappings # :nodoc:
-        @mappings ||= Hash.new
-      end
-
-      protected
-
-      def _map( key, value ) # :nodoc:
-        case value
+    ##
+    #
+    def map( *args )
+      args.each do |mapping|
+        case mapping
         when Class
-          mappings[ key ] = ClassMapping.new value
-        when Proc
-          mappings[ key ] = BlockMapping.new value
+          _map mapping, mapping
+        when Hash
+          mapping.each do |key, value|
+            _map key, value
+          end
         when Object
-          mappings[ key ] = ObjectMapping.new value
+          _map mapping.class, mapping
         end
       end
-    end
-
-    def initialize # :nodoc:
-      # TODO refactor into a class-level utility method
-      @mappings = self.class.mappings.dup.freeze
     end
 
     ##
     #
     def get( mapping, options={} )
-      case value = @mappings[ mapping ]
+      case value = mappings[ mapping ]
       when NilClass
         raise InjectionError, %Q{No injection mapping found for "#{mapping}"}
       when InjectionMapping
@@ -103,49 +79,28 @@ module Lotion
     ##
     #
     def inject_into( object )
-      if object.is_a?( Injection )
+      if object.is_a?( Injectable )
         object.fill_injection_points self
       else
-        raise InjectionError, 'Cannot inject into objects that do not include Lotion::Injection'
-      end
-    end
-  end
-
-  ##
-  #
-  module Injection
-    extend Lotion::Concern
-
-    def initialize # :nodoc:
-      # TODO refactor into a class-level utility method
-      @injection_points = self.class.injection_points.dup.freeze
-      super
-    end
-
-    ##
-    #
-    def fill_injection_points( injector )
-      @injection_points.each_pair do |key, value|
-        instance_variable_set :"@#{key}", injector.get( value )
+        raise InjectionError, 'Cannot inject into objects that do not include Lotion::Injectable'
       end
     end
 
-    module ClassMethods
+    private
 
-      ##
-      #
-      def inject( hash )
-        hash.each_pair do |key, value|
-          attr_reader key
-          injection_points[ key ] = value
-        end
+    def _map( key, value ) # :nodoc:
+      case value
+      when Class
+        mappings[ key ] = ClassMapping.new value
+      when Proc
+        mappings[ key ] = BlockMapping.new value
+      when Object
+        mappings[ key ] = ObjectMapping.new value
       end
+    end
 
-      ##
-      #
-      def injection_points
-        @injection_points ||= { }
-      end
+    def mappings
+      @mappings ||= Hash.new
     end
   end
 end
