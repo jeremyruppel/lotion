@@ -1,4 +1,5 @@
 require 'lotion/version'
+require 'lotion/core_ext'
 
 module Lotion
   autoload :Application, 'lotion/application'
@@ -7,9 +8,9 @@ module Lotion
   autoload :Commands,    'lotion/commands'
   autoload :Concern,     'lotion/concern'
   autoload :Container,   'lotion/container'
+  autoload :Delegate,    'lotion/delegate'
   autoload :Injectable,  'lotion/injectable'
   autoload :Injector,    'lotion/injector'
-  autoload :Prototype,   'lotion/prototype'
 
   class LotionError < StandardError; end
   class InjectionError < LotionError; end
