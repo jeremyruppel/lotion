@@ -46,7 +46,14 @@ module Lotion
 
   ##
   #
-  class Injector
+  class Injector < Struct.new( :container )
+
+    ##
+    #
+    def initialize( container, &block )
+      super
+      instance_eval &block if block_given?
+    end
 
     ##
     #

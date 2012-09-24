@@ -2,11 +2,12 @@ require 'spec_helper'
 
 describe Lotion::Injector do
 
+  let( :container ){ double 'container' }
+  let( :injector  ){ described_class.new container }
+
   describe 'mapping injections' do
     class Foo; end
     class Bar; end
-
-    let( :injector ){ described_class.new }
 
     describe 'implied class' do
       before  { injector.map Foo }
@@ -160,8 +161,6 @@ describe Lotion::Injector do
     class Bar; end
     class Baz; end
 
-    let( :injector ){ described_class.new }
-
     before do
       injector.map Foo
       injector.map Bar
@@ -191,7 +190,8 @@ describe Lotion::Injector do
       it 'should raise an exception' do
         expect {
           injector.inject_into( subject )
-        }.to raise_error( Lotion::InjectionError, 'No injection mapping found for "Baz"' )
+        }.to raise_error( Lotion::InjectionError,
+          'No injection mapping found for "Baz"' )
       end
     end
 
@@ -201,7 +201,8 @@ describe Lotion::Injector do
       it 'should raise an exception' do
         expect {
           injector.inject_into( subject )
-        }.to raise_error( Lotion::InjectionError, 'Cannot inject into objects that do not include Lotion::Injectable' )
+        }.to raise_error( Lotion::InjectionError,
+          'Cannot inject into objects that do not include Lotion::Injectable' )
       end
     end
   end

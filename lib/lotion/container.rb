@@ -1,4 +1,3 @@
-# require injector
 # require commands
 # require callbacks
 # require concern
@@ -9,12 +8,12 @@ module Lotion
 
     include Lotion::Callbacks
 
-    def injector( &block )
-      _injector.instance_eval &block
-    end
+    # def injector( &block )
+    #   block_given? ? _injector.instance_eval( &block ) : _injector
+    # end
 
     def commands( &block )
-      _commands.instance_eval &block
+      block_given? ? _commands.instance_eval( &block ) : _commands
     end
 
     def startup!
@@ -23,9 +22,11 @@ module Lotion
 
     private
 
-    def _injector
-      @_injector ||= Injector.new
-    end
+    # def _injector
+    #   @_injector ||= Injector.new self do
+    #     map Lotion::Application => container
+    #   end
+    # end
 
     def _commands
       @_commands ||= Commands.new self, _injector

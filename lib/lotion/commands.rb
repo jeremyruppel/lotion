@@ -5,9 +5,7 @@ module Lotion
 
     def map( event, command )
       callbacks.on event do
-        instance = command.new
-        injector.inject_into instance
-        instance.execute
+        injector.fill( command.new ).execute
       end
     end
   end

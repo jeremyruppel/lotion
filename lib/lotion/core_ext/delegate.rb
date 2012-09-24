@@ -1,4 +1,4 @@
-# require core_ext/extract_options
+# require extract_options
 
 class Module
 

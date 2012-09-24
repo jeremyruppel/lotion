@@ -15,8 +15,10 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = Lotion::VERSION
 
-  gem.add_dependency 'rake', '>= 0.9.2.2'
-  gem.add_dependency 'codependency', '>= 0.2.0'
+  gem.add_dependency 'rake',         '>= 0.9.2.2'
+  gem.add_dependency 'codependency', '>= 1.0.0'
 
-  gem.add_development_dependency 'rspec', '>= 2.10.0'
+  gem.add_development_dependency 'rspec',       '2.11.0'
+  gem.add_development_dependency 'guard-rspec', '1.2.1'
+  gem.add_development_dependency 'rb-fsevent',  '0.9.1'
 end
