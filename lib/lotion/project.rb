@@ -10,7 +10,7 @@ module Lotion
     def files
       @files ||= begin
         graph.files.map do |f|
-          Pathname.new( f ).relative_path_from( Dir.pwd ).to_s
+          Pathname( f ).relative_path_from( Pathname( Dir.pwd ) ).to_s
         end
       end
     end

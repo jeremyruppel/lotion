@@ -1,26 +1,19 @@
 require 'spec_helper'
 
 describe Lotion::Commands do
-  let( :callbacks ){ Class.new do
-    include Lotion::Callbacks
-  end.new }
+  let( :klass ){ Class.new do
+    include Lotion::Commands
+  end }
 
-  let( :injector  ){ double 'injector', :inject_into => true }
-  let( :command   ){ double 'command' }
+  describe 'commands' do
+    subject { klass.new }
 
-  subject { described_class.new callbacks, injector }
+    its( :commands ){ should be_a( Lotion::CommandMap ) }
 
-  it { should respond_to( :map ) }
+    it 'should instance eval the command map if given a block' do
+      subject.commands.should_receive( :map ).with( :foo => 'bar' )
 
-  describe 'mapping a command to an event' do
-    before { subject.map :event, command }
-
-    it 'should instantiate and execute the command when the event is triggered' do
-      instance = double 'command instance', :execute => true
-      command.should_receive( :new ).and_return instance
-      instance.should_receive( :execute )
-
-      callbacks.trigger :event
+      subject.commands { map :foo => 'bar' }
     end
   end
 end

@@ -1,21 +1,24 @@
 # require extract_options
 
 class Module
+  include Forwardable
 
   ##
   #
   def delegate( *args )
-    opts     = args.extract_options!
-    receiver = opts.delete :to
+    opts = args.extract_options!
 
-    args.each do |method|
-      class_eval <<-EOS
-        def #{method}( *args, &block )
-          if #{receiver} && #{receiver}.respond_to?( #{method.inspect} )
-            #{receiver}.send #{method.inspect}, *args, &block
-          end
-        end
-      EOS
+    prefix = case opts[ :prefix ]
+    when TrueClass
+      "#{opts[ :to ]}_"
+    when NilClass
+      ''
+    else
+      "#{opts[ :prefix ]}_"
+    end
+
+    args.each do |name|
+      def_delegator opts[ :to ], name, "#{prefix}#{name}".to_sym
     end
   end
 end
