@@ -11,8 +11,9 @@ module Lotion
   end
 
   class ServiceMap < Struct.new( :container )
-    def map
-      # TODO
+
+    def map( klass, &block )
+      Lotion::Actor.services[ klass ] = block
     end
   end
 end

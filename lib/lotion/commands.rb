@@ -14,9 +14,9 @@ module Lotion
 
   class CommandMap < Struct.new( :container )
 
-    def map( event, command )
-      callbacks.on event do
-        command.new( container ).execute
+    def map( events={} )
+      events.each do |event, command|
+        container.on( event ){ command.new.call }
       end
     end
   end

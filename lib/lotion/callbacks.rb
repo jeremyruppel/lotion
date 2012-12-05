@@ -1,3 +1,5 @@
+# require concern
+
 module Lotion
   module Callbacks
     extend Lotion::Concern

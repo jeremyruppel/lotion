@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Lotion::Commands do
   let( :klass ){ Class.new do
+    include Lotion::Callbacks
     include Lotion::Commands
   end }
 

@@ -1,6 +1,7 @@
-# require commands
-# require callbacks
 # require concern
+# require callbacks
+# require commands
+# require services
 
 module Lotion
   module Container
@@ -10,14 +11,18 @@ module Lotion
     include Lotion::Commands
     include Lotion::Services
 
-    def startup!
-      trigger :startup
+    class << self
+      attr_accessor :instance
     end
 
-    private
+    def initialize
+      super
+      Lotion::Container.instance = self
+    end
 
-    def _commands
-      @_commands ||= Commands.new self, _injector
+    # TODO use alias_method_chain here to do this transparently
+    def startup!
+      trigger :startup
     end
   end
 end

@@ -5,15 +5,14 @@ describe Lotion::Services do
     include Lotion::Services
   end }
 
-  describe 'services' do
+  describe '#services' do
     subject { klass.new }
 
     its( :services ){ should be_a( Lotion::ServiceMap ) }
 
-    it 'should instance eval the service map if given a block' do
-      subject.services.should_receive( :map ).with( :foo => 'bar' )
-
-      subject.services { map :foo => 'bar' }
+    it 'instance_evals the service map if given a block' do
+      subject.services.should_receive( :map ).with( :foo )
+      subject.services { map( :foo ){ 'bar' } }
     end
   end
 end

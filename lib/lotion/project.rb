@@ -38,7 +38,7 @@ if defined?( ::Motion )
 
     lotion = Lotion::Project.new
 
-    app.files_dependencies 'app/app_delegate.rb' => lotion.files
-    app.files << lotion.files
+    app.files += lotion.files
+    app.files_dependencies './app/app_delegate.rb' => lotion.files
   end
 end

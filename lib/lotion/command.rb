@@ -1,7 +1,9 @@
-module Lotion
-  class Command
+# require actor
 
-    # inject :app => Lotion::Application
+module Lotion
+  class Command < Lotion::Actor
+
+    # inject :app, Lotion::Application
 
     def call
       raise NotImplementedError

@@ -1,6 +1,7 @@
 require 'lotion/version'
 
 module Lotion
+  autoload :Actor,     'lotion/actor'
   autoload :Callbacks, 'lotion/callbacks'
   autoload :Command,   'lotion/command'
   autoload :Commands,  'lotion/commands'
