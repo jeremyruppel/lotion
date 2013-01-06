@@ -6,6 +6,7 @@
 module Lotion
   module Application
     extend Lotion::Concern
+    include Lotion::Notifications
 
     included do
       delegate :bounds, :to => :screen
@@ -21,6 +22,12 @@ module Lotion
     #
     def window
       @window ||= UIWindow.alloc.initWithFrame bounds
+    end
+
+    ##
+    #
+    def application( application, didFinishLaunchingWithOptions:launchOptions )
+      notify 'application:startup', launchOptions
     end
   end
 end
