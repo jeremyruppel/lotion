@@ -5,27 +5,33 @@ module Lotion
   class Project
 
     ##
-    # the topologically sorted list of lotion dependencies, relative
+    # The topologically sorted list of lotion dependencies, relative
     # to the current working directory
     def files
       @files ||= begin
         graph.files.map do |f|
-          Pathname( f ).relative_path_from( Pathname( Dir.pwd ) ).to_s
+          # FIXME we join '.' here so project will work for our test suite.
+          # It isn't necessary when lotion is used as a library, so
+          # there may be a more elegant solution.
+          File.join '.', Pathname( f ).relative_path_from( cwd ).to_s
         end
       end
     end
 
     ##
-    # the lotion dependency graph
+    # The lotion dependency graph
     def graph
-      Codependency::Graph.new container
+      Codependency::Graph.new root
     end
 
     ##
-    # path to Lotion::Container, will automatically bring in
-    # all of the necessary dependencies
-    def container
-      File.expand_path File.join( __FILE__, '../container.rb' )
+    # Absolute path to Lotion::Application
+    def root
+      File.expand_path File.join( __FILE__, '../application.rb' )
+    end
+
+    def cwd
+      Pathname.pwd
     end
   end
 end
@@ -33,9 +39,8 @@ end
 if defined?( ::Motion )
 
   ##
-  # if ::Motion is defined, install the lotion dependencies in the project
+  # If ::Motion is defined, install the lotion dependencies in the project
   Motion::Project::App.setup do |app|
-
     lotion = Lotion::Project.new
 
     app.files += lotion.files

@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'rake',         '>= 0.9.2.2'
   gem.add_dependency 'codependency', '>= 1.0.0'
 
-  gem.add_development_dependency 'rspec',       '2.11.0'
-  gem.add_development_dependency 'guard-rspec', '1.2.1'
-  gem.add_development_dependency 'rb-fsevent',  '0.9.1'
+  gem.add_development_dependency 'guard-motion', '0.1.1'
+  gem.add_development_dependency 'rb-fsevent',   '~> 0.9.1'
+  gem.add_development_dependency 'motion-stump', '0.2.0'
 end

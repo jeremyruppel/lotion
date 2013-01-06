@@ -2,12 +2,14 @@
 *.rbc
 .bundle
 .config
+.dat*
+.repl_history
 .yardoc
+build
+coverage
+doc
 Gemfile.lock
 InstalledFiles
-_yardoc
-coverage
-doc/
 lib/bundler/man
 pkg
 rdoc
@@ -15,3 +17,4 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
+_yardoc
