@@ -1,6 +1,6 @@
-# require core_ext/array/extract_options
 # require core_ext/module/delegation
 # require core_ext/string/inflections
+# require concern
 
 module Lotion
   module Application
