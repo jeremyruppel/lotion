@@ -1,14 +1,26 @@
 # require core_ext/module/delegation
 # require core_ext/string/inflections
+# require actor
 # require concern
 
 module Lotion
   module Application
+    extend Lotion::Concern
+
+    included do
+      delegate :bounds, :to => :screen
+    end
 
     ##
     #
-    def app
-      UIApplication.sharedApplication.delegate
+    def screen
+      UIScreen.mainScreen
+    end
+
+    ##
+    #
+    def window
+      @window ||= UIWindow.alloc.initWithFrame bounds
     end
   end
 end

@@ -13,7 +13,7 @@ module Lotion
       if block_given?
         @included_blocks << block
       else
-        @included_blocks.each &:call
+        @included_blocks.each { |blk| base.class_eval &blk }
       end
     end
   end

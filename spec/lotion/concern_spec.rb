@@ -9,6 +9,9 @@ describe 'Lotion::Concern' do
     included do
       $ran << 'two'
     end
+    included do
+      $who = self
+    end
 
     def foo; true; end
 
@@ -32,5 +35,8 @@ describe 'Lotion::Concern' do
   end
   it 'runs all .included blocks' do
     $ran.should == [ 'one', 'two' ]
+  end
+  it 'runs the .included blocks in the context of the class' do
+    $who.should == @klass
   end
 end
