@@ -1,42 +1,33 @@
-describe 'Lotion::Concern' do
+describe Lotion::Concern do
 
   module MyConcern
     extend Lotion::Concern
 
-    included do
-      $ran << 'one'
-    end
-    included do
-      $ran << 'two'
-    end
-    included do
-      $who = self
-    end
+    included { $ran << 'one' }
+    included { $ran << 'two' }
+    included { $who = self   }
 
     def foo; true; end
 
-    module ClassMethods
-      def bar; true; end
-    end
+    module ClassMethods; def bar; true; end; end
   end
 
-  before do
-    $ran   = [ ]
-    @klass = Class.new do
-      include MyConcern
-    end
+  before { $ran = [ ] }
+
+  subject do
+    include MyConcern
   end
 
   it 'responds to #foo' do
-    @klass.new.should.respond_to :foo
+    subject.should.respond_to :foo
   end
   it 'responds to .bar' do
-    @klass.should.respond_to :bar
+    subject.class.should.respond_to :bar
   end
   it 'runs all .included blocks' do
     $ran.should == [ 'one', 'two' ]
   end
   it 'runs the .included blocks in the context of the class' do
-    $who.should == @klass
+    $who.should == subject.class
   end
 end
