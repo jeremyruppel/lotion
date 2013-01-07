@@ -35,7 +35,7 @@ module Lotion
     ##
     #
     def views
-      @views ||= Hash.new { |h, k| h[ k ] = k.alloc.initialize! }
+      @views ||= Hash.new { |h, k| h[ k ] = k.alloc.init }
     end
 
     ##

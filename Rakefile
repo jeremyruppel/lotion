@@ -2,8 +2,6 @@
 $:.unshift '/Library/RubyMotion/lib'
 $:.unshift 'lib'
 
-ENV[ 'LOTION_ENV' ] = 'development'
-
 require 'motion/project'
 require 'lotion/project'
 require 'lotion/version'
