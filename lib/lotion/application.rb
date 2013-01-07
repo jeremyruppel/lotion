@@ -1,7 +1,8 @@
 # require core_ext/module/delegation
 # require core_ext/string/inflections
-# require actor
+# require command
 # require concern
+# require notifications
 
 module Lotion
   module Application

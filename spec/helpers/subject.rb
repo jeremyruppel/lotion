@@ -3,8 +3,8 @@ module Bacon
 
     ##
     # Syntactic sugar for creating an anonymous class in a before block.
-    def subject( &block )
-      block_given? ? before { @subject = Class.new( &block ).new } : @subject
+    def subject( base=Object, &block )
+      block_given? ? before { @subject = Class.new( base, &block ).new } : @subject
     end
   end
 end

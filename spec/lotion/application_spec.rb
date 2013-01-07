@@ -9,6 +9,9 @@ describe Lotion::Application do
     include Lotion::Application
   end
 
+  it 'includes the correct concerns' do
+    subject.should be_a( Lotion::Notifications )
+  end
   it 'defines #screen' do
     subject.screen.should == UIScreen.mainScreen
   end

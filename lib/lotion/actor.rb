@@ -4,6 +4,7 @@
 module Lotion
   module Actor
     extend Lotion::Concern
+    include Lotion::Notifications
 
     ##
     #
