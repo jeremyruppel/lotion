@@ -2,7 +2,6 @@ describe Lotion::Application do
 
   before do
     @center = NSNotificationCenter.defaultCenter
-    @method = 'postNotificationName:object:userInfo'
   end
 
   subject do
@@ -24,12 +23,27 @@ describe Lotion::Application do
   it 'notifies after application startup' do
     options = { :foo => 'bar' }
 
-    @center.mock! @method do |name, from, info|
+    @center.mock! 'postNotificationName:object:userInfo:' do |name, from, info|
       name.should == 'application:startup'
       from.should == subject
       info.should == options
     end
 
     subject.application( nil, didFinishLaunchingWithOptions:options ).should == true
+  end
+  it 'responds to #on' do
+    subject.should.respond_to :on
+  end
+  it 'attaches commands to notifications' do
+    command = stub :call, :return => true
+
+    @center.mock! 'addObserver:selector:name:object:' do |klass, selector, name, object|
+      klass.should    == command
+      selector.should == 'call:'
+      name.should     == 'foo'
+      object.should   == nil
+    end
+
+    subject.on 'foo', command
   end
 end
