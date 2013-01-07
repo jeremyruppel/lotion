@@ -18,5 +18,9 @@ module Lotion
     def self.call( notification )
       new( notification ).call
     end
+    
+    # def self.call( *args )
+    #   new( args ).call
+    # end
   end
 end

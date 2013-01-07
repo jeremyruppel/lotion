@@ -13,7 +13,12 @@ module Lotion
           # FIXME we join '.' here so project will work for our test suite.
           # It isn't necessary when lotion is used as a library, so
           # there may be a more elegant solution.
-          File.join '.', Pathname( f ).relative_path_from( cwd ).to_s
+          if env == 'development'
+            File.join './', Pathname( f ).relative_path_from( cwd ).to_s
+          else
+            Pathname( f ).relative_path_from( cwd ).to_s
+          end
+
         end
       end
     end
@@ -34,6 +39,12 @@ module Lotion
     #
     def cwd
       Pathname.pwd
+    end
+
+    ##
+    #
+    def env
+      ENV[ 'LOTION_ENV' ] ||= 'project'
     end
   end
 end

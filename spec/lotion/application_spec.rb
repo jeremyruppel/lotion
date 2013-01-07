@@ -20,6 +20,9 @@ describe Lotion::Application do
   it 'defines #window' do
     subject.window.should be_a( UIWindow )
   end
+  it 'defined #views' do
+    subject.views.should be_a( Hash )
+  end
   it 'notifies after application startup' do
     options = { :foo => 'bar' }
 

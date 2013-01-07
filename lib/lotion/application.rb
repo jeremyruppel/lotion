@@ -34,6 +34,12 @@ module Lotion
 
     ##
     #
+    def views
+      @views ||= Hash.new { |h, k| h[ k ] = k.alloc.initialize! }
+    end
+
+    ##
+    #
     def application( application, didFinishLaunchingWithOptions:launchOptions )
       notify 'application:startup', launchOptions
     end
