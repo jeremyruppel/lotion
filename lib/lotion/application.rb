@@ -1,10 +1,10 @@
 # require core_ext/module/delegation
 # require core_ext/string/inflections
+# require core_ext/ui_kit/ui_view
 # require command
 # require concern
 # require form
 # require notifications
-# require view
 
 module Lotion
   module Application
