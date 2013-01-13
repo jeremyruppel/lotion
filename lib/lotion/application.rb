@@ -4,6 +4,7 @@
 # require concern
 # require form
 # require notifications
+# require view
 
 module Lotion
   module Application

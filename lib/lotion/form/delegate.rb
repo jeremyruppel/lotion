@@ -20,7 +20,7 @@ module Lotion
         cell = UITableViewCell.alloc.initWithStyle \
           UITableViewCellStyleDefault, reuseIdentifier:reuseIdentifier
 
-        cell.accessoryView = data[ indexPath ]
+        cell.accessoryView = data[ indexPath ].view
 
         cell.accessoryView.delegate = self
         cell.accessoryView.release # TODO is this necessary?

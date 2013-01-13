@@ -28,7 +28,7 @@ module Lotion
         attr_reader :title
 
         def text_field( &block )
-          self << block.call
+          self << Lotion::View::UITextField.new( &block )
         end
       end
 
