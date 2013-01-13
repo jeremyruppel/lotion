@@ -1,3 +1,10 @@
+# require core_ext/ui_kit/ui_text_autocapitalization_type
+# require core_ext/ui_kit/ui_text_autocorrection_type
+# require core_ext/ui_kit/ui_text_spell_checking_type
+# require core_ext/ui_kit/ui_keyboard_type
+# require core_ext/ui_kit/ui_keyboard_appearance
+# require core_ext/ui_kit/ui_return_key_type
+
 module Lotion
   module UITextInputTraits
 
