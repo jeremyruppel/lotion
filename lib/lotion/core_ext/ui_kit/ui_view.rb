@@ -18,7 +18,7 @@ class UIView
     # while in the .configure block.
     def proxy( &block )
       @proxy ||= Struct.new( :view )
-      @proxy.instance_exec &block if block_given?
+      @proxy.class_eval &block if block_given?
       @proxy
     end
   end

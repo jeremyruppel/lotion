@@ -1,6 +1,6 @@
 # require core_ext/module/delegation
 # require core_ext/string/inflections
-# require core_ext/ui_kit/ui_view
+# require core_ext/ui_kit/ui_text_field
 # require command
 # require concern
 # require form
