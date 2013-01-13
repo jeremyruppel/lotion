@@ -6,6 +6,9 @@ describe UITextField do
       @proxy = UITextField.proxy.new double( 'view' )
     end
 
+    it 'includes UIViewTraits' do
+      @proxy.is_a?( Lotion::UIViewTraits ).should == true
+    end
     it 'includes UITextInputTraits' do
       @proxy.is_a?( Lotion::UITextInputTraits ).should == true
     end

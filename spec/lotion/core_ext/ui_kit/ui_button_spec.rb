@@ -6,6 +6,9 @@ describe UIButton do
       @proxy = UIButton.proxy.new double( 'view' )
     end
 
+    it 'includes UIViewTraits' do
+      @proxy.is_a?( Lotion::UIViewTraits ).should == true
+    end
     it 'delegates #title to the view' do
       @proxy.view.mock! 'setTitle:forState:' do |title, state|
         title.should == 'Foo'

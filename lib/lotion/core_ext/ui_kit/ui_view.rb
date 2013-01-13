@@ -1,3 +1,5 @@
+# require core_ext/ui_kit/ui_view_traits
+
 class UIView
 
   class << self
@@ -28,5 +30,9 @@ class UIView
       @proxy.class_eval &block if block_given?
       @proxy
     end
+  end
+  
+  proxy do
+    include Lotion::UIViewTraits
   end
 end

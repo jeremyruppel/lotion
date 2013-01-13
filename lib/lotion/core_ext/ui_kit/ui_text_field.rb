@@ -5,6 +5,7 @@
 class UITextField
 
   proxy do
+    include Lotion::UIViewTraits
     include Lotion::UITextInputTraits
 
     ##

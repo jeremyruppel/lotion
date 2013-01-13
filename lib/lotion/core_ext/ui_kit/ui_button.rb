@@ -4,7 +4,22 @@
 
 class UIButton
 
+  class << self
+
+    ##
+    # Override .build to allow for initialization of different
+    # buttons types.
+    def build( options )
+      if options[ :type ]
+        buttonWithType UIButtonType[ options[ :type ] ]
+      else
+        super
+      end
+    end
+  end
+
   proxy do
+    include Lotion::UIViewTraits
 
     ##
     # Sets the title to use for the specified state.
@@ -18,20 +33,6 @@ class UIButton
     # @see UIControlState
     def title_color( color, state )
       view.setTitleColor color, forState:UIControlState[ state ]
-    end
-  end
-
-  class << self
-
-    ##
-    # Override .build to allow for initialization of different
-    # buttons types.
-    def build( options )
-      if options[ :type ]
-        buttonWithType UIButtonType[ options[ :type ] ]
-      else
-        super
-      end
     end
   end
 end
