@@ -7,4 +7,10 @@ class String
   def demodulize
     split( '::' ).pop
   end
+
+  def constantize
+    split( '::' ).reduce( Kernel ) do |memo, name|
+      memo.const_get name
+    end
+  end
 end

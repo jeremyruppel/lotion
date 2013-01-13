@@ -20,3 +20,13 @@ describe 'String#demodulize' do
     'Foo'.demodulize.should == 'Foo'
   end
 end
+
+describe 'String#constantize' do
+
+  it 'returns the constant if the constant is defined' do
+    'Lotion::Application'.constantize.should == Lotion::Application
+  end
+  it 'raises a NameError if the constant is not defined' do
+    lambda { 'Foo::Bar'.constantize }.should.raise( NameError )
+  end
+end
