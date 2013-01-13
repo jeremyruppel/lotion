@@ -8,10 +8,16 @@ module Lotion
     end
 
     ##
-    # Looks up the value for the given key. If the key is not defined,
-    # returns the key instead of `nil`. Useful for creating mappings.
+    # Looks up the value for the given key. Raises a `NameError`
+    # if the key is not defined. Useful for creating mappings.
     def []( key )
-      has_key?( key ) ? super : key
+      if has_key? key
+        super
+      elsif has_value? key
+        key
+      else
+        raise NameError, "No enumeration #{key} found for #{self}."
+      end
     end
   end
 end

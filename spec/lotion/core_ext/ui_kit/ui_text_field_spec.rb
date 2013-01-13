@@ -11,15 +11,15 @@ describe UITextField do
     end
     it 'delegates #placeholder to the view' do
       @proxy.view.mock! :setPlaceholder do |arg|
-        arg.should == :foo
+        arg.should == 'Foo'
       end
-      @proxy.placeholder :foo
+      @proxy.placeholder 'Foo'
     end
     it 'delegates #clear_button_mode to the view' do
       @proxy.view.mock! :setClearButtonMode do |arg|
-        arg.should == :foo
+        arg.should == UITextFieldViewModeNever
       end
-      @proxy.clear_button_mode :foo
+      @proxy.clear_button_mode :never
     end
   end
 end

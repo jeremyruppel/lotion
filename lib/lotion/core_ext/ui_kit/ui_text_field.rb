@@ -17,8 +17,9 @@ class UITextField
     ##
     # Controls when the standard clear button appears in
     # the text field.
+    # @see UITextFieldViewMode
     def clear_button_mode( value )
-      view.setClearButtonMode value
+      view.setClearButtonMode UITextFieldViewMode[ value ]
     end
   end
 end

@@ -12,14 +12,14 @@ module Lotion
     # The auto-capitalization style for the text object.
     # @see UITextAutocapitalizationType
     def autocapitalization_type( value )
-      view.setAutocapitalizationType value
+      view.setAutocapitalizationType UITextAutocapitalizationType[ value ]
     end
 
     ##
     # The auto-correction style for the text object.
     # @see UITextAutocorrectionType
     def autocorrection_type( value )
-      view.setAutocorrectionType value
+      view.setAutocorrectionType UITextAutocorrectionType[ value ]
     end
 
     ##
@@ -34,21 +34,21 @@ module Lotion
     # text object.
     # @see UIKeyboardAppearance
     def keyboard_appearance( value )
-      view.setKeyboardAppearance value
+      view.setKeyboardAppearance UIKeyboardAppearance[ value ]
     end
 
     ##
     # The keyboard style associated with the text object.
     # @see UIKeyboardType
     def keyboard_type( value )
-      view.setKeyboardType value
+      view.setKeyboardType UIKeyboardType[ value ]
     end
 
     ##
     # The contents of the “return” key.
     # @see UIReturnKeyType
     def return_key_type( value )
-      view.setReturnKeyType value
+      view.setReturnKeyType UIReturnKeyType[ value ]
     end
 
     ##
@@ -62,7 +62,7 @@ module Lotion
     # The spell-checking style for the text object.
     # @see UITextSpellCheckingType
     def spell_checking_type( value )
-      view.setSpellCheckingType value
+      view.setSpellCheckingType UITextSpellCheckingType[ value ]
     end
   end
 end

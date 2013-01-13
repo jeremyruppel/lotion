@@ -9,13 +9,15 @@ describe Lotion::Enum do
   it 'is a Hash' do
     @subject.is_a?( Hash ).should == true
   end
-  it 'maps :foo to "Foo!"' do
+  it 'provides the value for any keys set' do
     @subject[ :foo ].should == 'Foo!'
-  end
-  it 'maps :bar to "Bar!"' do
     @subject[ :bar ].should == 'Bar!'
   end
-  it 'allows any other keys to pass through' do
-    @subject[ :baz ].should == :baz
+  it 'passes any set values through' do
+    @subject[ 'Foo!' ].should == 'Foo!'
+    @subject[ 'Bar!' ].should == 'Bar!'
+  end
+  it 'raises an exception for undefined values' do
+    lambda { @subject[ :baz ] }.should.raise( NameError )
   end
 end
