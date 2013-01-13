@@ -3,9 +3,16 @@ class UIView
   class << self
 
     ##
+    # Hook to build a new view. Subclasses may override this if
+    # they need to use a different factory method.
+    def build( options )
+      alloc
+    end
+
+    ##
     # Allocates a new view and configures it in the given block.
     def configure( options={}, &block )
-      alloc.tap do |view|
+      build( options ).tap do |view|
         view.initWithFrame options[ :frame ] if options[ :frame ]
         view.initWithCoder options[ :coder ] if options[ :coder ]
 

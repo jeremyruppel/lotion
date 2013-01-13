@@ -30,6 +30,10 @@ module Lotion
         def text_field( options={}, &block )
           self << UITextField.configure( options, &block )
         end
+
+        def button( options={}, &block )
+          self << UIButton.configure( options, &block )
+        end
       end
 
       ##

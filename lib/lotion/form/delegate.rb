@@ -22,9 +22,9 @@ module Lotion
 
         cell.accessoryView = data[ indexPath ]
 
-        cell.accessoryView.delegate = self
-        cell.accessoryView.release # TODO is this necessary?
-        cell.selectionStyle = UITableViewCellSelectionStyleNone
+        # cell.accessoryView.delegate = self
+        # cell.accessoryView.release # TODO is this necessary?
+        # cell.selectionStyle = UITableViewCellSelectionStyleNone
         cell
       end
 
