@@ -2,8 +2,10 @@ module Lotion
   module Form
     module Delegate
 
+      # TODO these should all be moved into a table concern
+
       def numberOfSectionsInTableView( tableView )
-        data.size
+        data.count
       end
 
       def tableView( tableView, titleForHeaderInSection:section )
@@ -11,7 +13,7 @@ module Lotion
       end
 
       def tableView( tableView, numberOfRowsInSection:section )
-        data[ section ].size
+        data[ section ].count
       end
 
       def tableView( tableView, cellForRowAtIndexPath:indexPath )
