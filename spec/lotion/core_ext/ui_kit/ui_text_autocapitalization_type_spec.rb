@@ -1,21 +1,18 @@
 describe 'UITextAutocapitalizationType' do
 
-  # TODO described_class
-  before { @subject = UITextAutocapitalizationType }
-
   it 'is a Lotion::Enum' do
-    @subject.is_a?( Lotion::Enum ).should == true
+    described_class.is_a?( Lotion::Enum ).should == true
   end
   it 'maps `UITextAutocapitalizationTypeNone`' do
-    @subject[ :none ].should == UITextAutocapitalizationTypeNone
+    described_class[ :none ].should == UITextAutocapitalizationTypeNone
   end
   it 'maps `UITextAutocapitalizationTypeWords`' do
-    @subject[ :words ].should == UITextAutocapitalizationTypeWords
+    described_class[ :words ].should == UITextAutocapitalizationTypeWords
   end
   it 'maps `UITextAutocapitalizationTypeSentences`' do
-    @subject[ :sentences ].should == UITextAutocapitalizationTypeSentences
+    described_class[ :sentences ].should == UITextAutocapitalizationTypeSentences
   end
   it 'maps `UITextAutocapitalizationTypeAllCharacters`' do
-    @subject[ :all_characters ].should == UITextAutocapitalizationTypeAllCharacters
+    described_class[ :all_characters ].should == UITextAutocapitalizationTypeAllCharacters
   end
 end

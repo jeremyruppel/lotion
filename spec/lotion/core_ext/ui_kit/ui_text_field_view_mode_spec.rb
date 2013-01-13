@@ -1,21 +1,18 @@
 describe 'UITextFieldViewMode' do
 
-  # TODO described_class
-  before { @subject = UITextFieldViewMode }
-
   it 'is a Lotion::Enum' do
-    @subject.is_a?( Lotion::Enum ).should == true
+    described_class.is_a?( Lotion::Enum ).should == true
   end
   it 'maps `UITextFieldViewModeNever`' do
-    @subject[ :never ].should == UITextFieldViewModeNever
+    described_class[ :never ].should == UITextFieldViewModeNever
   end
   it 'maps `UITextFieldViewModeWhileEditing`' do
-    @subject[ :while_editing ].should == UITextFieldViewModeWhileEditing
+    described_class[ :while_editing ].should == UITextFieldViewModeWhileEditing
   end
   it 'maps `UITextFieldViewModeUnlessEditing`' do
-    @subject[ :unless_editing ].should == UITextFieldViewModeUnlessEditing
+    described_class[ :unless_editing ].should == UITextFieldViewModeUnlessEditing
   end
   it 'maps `UITextFieldViewModeAlways`' do
-    @subject[ :always ].should == UITextFieldViewModeAlways
+    described_class[ :always ].should == UITextFieldViewModeAlways
   end
 end
