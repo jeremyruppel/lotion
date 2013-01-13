@@ -3,7 +3,7 @@ describe UITextField do
   describe '.proxy' do
 
     before do
-      @proxy = UITextField.proxy.new( UITextField.alloc )
+      @proxy = UITextField.proxy.new double( 'view' )
     end
 
     it 'includes UITextInputTraits' do
