@@ -2,6 +2,7 @@
 # require core_ext/string/inflections
 # require command
 # require concern
+# require form
 # require notifications
 
 module Lotion
