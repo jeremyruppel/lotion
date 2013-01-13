@@ -27,8 +27,8 @@ module Lotion
         end
         attr_reader :title
 
-        def text_field( &block )
-          self << Lotion::View::UITextField.new( &block )
+        def text_field( options={}, &block )
+          self << UITextField.configure( options, &block )
         end
       end
 

@@ -1,5 +1,6 @@
 # require core_ext/ui_kit/ui_view
 # require core_ext/ui_kit/ui_text_input_traits
+# require core_ext/ui_kit/ui_text_field_view_mode
 
 class UITextField
 

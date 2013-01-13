@@ -3,6 +3,7 @@
 # require core_ext/ui_kit/ui_text_field
 # require command
 # require concern
+# require enum
 # require form
 # require notifications
 
