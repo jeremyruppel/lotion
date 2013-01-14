@@ -1,3 +1,5 @@
+# require core_ext/ui_kit/ui_table_view_cell_style
+
 module Lotion
   module Form
     module Delegate
@@ -18,7 +20,7 @@ module Lotion
 
       def tableView( tableView, cellForRowAtIndexPath:indexPath )
         cell = UITableViewCell.alloc.initWithStyle \
-          UITableViewCellStyleDefault, reuseIdentifier:reuseIdentifier
+          UITableViewCellStyle[ :default ], reuseIdentifier:reuseIdentifier
 
         cell.accessoryView = data[ indexPath ]
 

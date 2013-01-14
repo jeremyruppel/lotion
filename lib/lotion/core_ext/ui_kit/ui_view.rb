@@ -18,7 +18,7 @@ class UIView
         view.initWithFrame options[ :frame ] if options[ :frame ]
         view.initWithCoder options[ :coder ] if options[ :coder ]
 
-        proxy.new( view ).instance_exec &block
+        proxy.new( view ).instance_eval &block
       end
     end
 
@@ -31,7 +31,7 @@ class UIView
       @proxy
     end
   end
-  
+
   proxy do
     include Lotion::UIViewTraits
   end
