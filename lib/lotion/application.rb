@@ -8,6 +8,8 @@
 # require concern
 # require enum
 # require form
+# require hash_extensions/indifferent_access
+# require hash_extensions/merge_initializer
 # require notifications
 
 module Lotion
