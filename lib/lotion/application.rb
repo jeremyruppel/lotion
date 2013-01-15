@@ -1,3 +1,4 @@
+# require core_ext/array/access
 # require core_ext/hash/reverse_merge
 # require core_ext/module/delegation
 # require core_ext/string/inflections
@@ -7,6 +8,7 @@
 # require command
 # require concern
 # require enum
+# require form
 # require form_view_controller
 # require hash_extensions/indifferent_access
 # require hash_extensions/merge_initializer
