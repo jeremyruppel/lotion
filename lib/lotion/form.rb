@@ -6,20 +6,27 @@ module Lotion
     include Lotion::UITableViewDataSource
 
     def data
-      self.class.sections
+      @data ||= self.class.sections
     end
 
-    # def tableView( tableView, cellForRowAtIndexPath:indexPath )
-    #   cell = UITableViewCell.alloc.initWithStyle \
-    #     UITableViewCellStyle[ :default ], reuseIdentifier:reuseIdentifier
-    #
-    #   cell.accessoryView = data[ indexPath ]
-    #
-    #   # cell.accessoryView.delegate = self
-    #   # cell.accessoryView.release # TODO is this necessary?
-    #   # cell.selectionStyle = UITableViewCellSelectionStyleNone
-    #   cell
-    # end
+    def tableView( tableView, cellForRowAtIndexPath:indexPath )
+      puts "TABLE VIEW CELL: #{reuseIdentifier} #{data[ indexPath ]}"
+
+      view = send data[ indexPath ]
+
+      cell = tableView.dequeueReusableCellWithIdentifier( reuseIdentifier ) || begin
+        UITableViewCell.alloc.initWithStyle \
+          UITableViewCellStyle[ :default ], reuseIdentifier:reuseIdentifier
+      end
+
+      cell.accessoryView  = view
+      cell.selectionStyle = UITableViewCellSelectionStyleNone
+
+      # cell.accessoryView.delegate = self
+      # cell.accessoryView.release # TODO is this necessary?
+
+      cell
+    end
 
     class << self
 
