@@ -4,12 +4,12 @@
 # require core_ext/string/inflections
 # require core_ext/ui_kit/ui_button
 # require core_ext/ui_kit/ui_color
+# require core_ext/ui_kit/ui_form_view_controller
 # require core_ext/ui_kit/ui_text_field
 # require command
 # require concern
 # require enum
 # require form
-# require form_view_controller
 # require hash_extensions/indifferent_access
 # require hash_extensions/merge_initializer
 # require notifications

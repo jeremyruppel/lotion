@@ -1,6 +1,6 @@
-describe Lotion::FormViewController do
+describe Lotion::UIFormViewController do
   subject do
-    include Lotion::FormViewController
+    include Lotion::UIFormViewController
   end
   #
   # it 'includes Lotion::Form::Delegate' do

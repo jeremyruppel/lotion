@@ -1,5 +1,5 @@
 module Lotion
-  module FormViewController
+  module UIFormViewController
 
     def init
       super && initWithStyle( UITableViewStyleGrouped )
