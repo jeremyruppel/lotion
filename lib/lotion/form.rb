@@ -3,6 +3,7 @@
 
 module Lotion
   class Form
+    include Lotion::Actor
     include Lotion::UITableViewDataSource
 
     def data
@@ -10,9 +11,11 @@ module Lotion
     end
 
     def tableView( tableView, cellForRowAtIndexPath:indexPath )
-      puts "TABLE VIEW CELL: #{reuseIdentifier} #{data[ indexPath ]}"
+      # puts "TABLE VIEW CELL: #{reuseIdentifier} #{data[ indexPath ]}"
 
       view = send data[ indexPath ]
+
+      tags[ view.tag ] = view
 
       cell = tableView.dequeueReusableCellWithIdentifier( reuseIdentifier ) || begin
         UITableViewCell.alloc.initWithStyle \
@@ -22,10 +25,32 @@ module Lotion
       cell.accessoryView  = view
       cell.selectionStyle = UITableViewCellSelectionStyleNone
 
+      view.delegate = self if view.respond_to? :delegate
+
       # cell.accessoryView.delegate = self
       # cell.accessoryView.release # TODO is this necessary?
 
       cell
+    end
+
+    def tags
+      @tags ||= { }
+    end
+
+    def textFieldShouldReturn( textField )
+      case textField.returnKeyType
+      when UIReturnKeyType[ :next ]
+        if nextField = tags[ textField.tag.next ]
+          nextField.becomeFirstResponder
+        else
+          textField.resignFirstResponder
+        end
+      when UIReturnKeyType[ :go ]
+        textField.resignFirstResponder
+        # TODO notify the context?
+      else
+        false
+      end
     end
 
     class << self
@@ -34,7 +59,7 @@ module Lotion
         @sections ||= Lotion::NamedArray.new( to_s.underscore )
       end
 
-      def section( name )
+      def section( name=nil )
         sections << Lotion::NamedArray.new( name )
       end
 
