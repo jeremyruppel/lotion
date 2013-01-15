@@ -15,6 +15,9 @@ describe Lotion::NamedArray do
     indexPath = NSIndexPath.indexPathForRow 2, inSection:0
     @subject[ indexPath ].should == 3
   end
+  it 'provides the #rows of all its sections' do
+    @subject.rows.should == [ 1, 2, 3, 1, 2 ]
+  end
 end
 
 describe Lotion::UITableViewDataSource do

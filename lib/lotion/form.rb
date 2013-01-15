@@ -13,9 +13,7 @@ module Lotion
     def tableView( tableView, cellForRowAtIndexPath:indexPath )
       # puts "TABLE VIEW CELL: #{reuseIdentifier} #{data[ indexPath ]}"
 
-      view = send data[ indexPath ]
-
-      tags[ view.tag ] = view
+      view = send( data[ indexPath ] )
 
       cell = tableView.dequeueReusableCellWithIdentifier( reuseIdentifier ) || begin
         UITableViewCell.alloc.initWithStyle \
@@ -33,14 +31,10 @@ module Lotion
       cell
     end
 
-    def tags
-      @tags ||= { }
-    end
-
     def textFieldShouldReturn( textField )
       case textField.returnKeyType
       when UIReturnKeyType[ :next ]
-        if nextField = tags[ textField.tag.next ]
+        if nextField = send( data.rows[ textField.tag.next ] )
           nextField.becomeFirstResponder
         else
           textField.resignFirstResponder

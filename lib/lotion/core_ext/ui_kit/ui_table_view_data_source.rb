@@ -15,6 +15,14 @@ module Lotion
     def []( index )
       index.is_a?( NSIndexPath ) ? self[ index.section ][ index.row ] : super
     end
+
+    ##
+    # Since NamedArray assumes it is multidimensional,
+    # this is a convenience accessor for the second dimension
+    # of items.
+    def rows
+      flatten
+    end
   end
 
   module UITableViewDataSource
