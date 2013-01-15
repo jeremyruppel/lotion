@@ -1,7 +1,7 @@
 # require core_ext/ui_kit/ui_table_view_cell_style
 
 module Lotion
-  module Form
+  module FormViewController
     module Delegate
 
       # TODO these should all be moved into a table concern

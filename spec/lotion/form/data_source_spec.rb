@@ -1,6 +1,6 @@
-describe Lotion::Form::DataSource do
+describe Lotion::FormViewController::DataSource do
   subject do
-    include Lotion::Form::DataSource
+    include Lotion::FormViewController::DataSource
   end
 
   it 'defines #data' do

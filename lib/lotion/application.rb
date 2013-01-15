@@ -7,7 +7,7 @@
 # require command
 # require concern
 # require enum
-# require form
+# require form_view_controller
 # require hash_extensions/indifferent_access
 # require hash_extensions/merge_initializer
 # require notifications

@@ -1,5 +1,5 @@
 module Lotion
-  module Form
+  module FormViewController
     module DataSource
 
       ##

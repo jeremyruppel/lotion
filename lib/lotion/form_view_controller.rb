@@ -2,7 +2,7 @@
 # require form/delegate
 
 module Lotion
-  module Form
+  module FormViewController
     include DataSource
     include Delegate
 

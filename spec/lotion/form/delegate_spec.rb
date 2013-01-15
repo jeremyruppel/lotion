@@ -1,6 +1,6 @@
-describe Lotion::Form::Delegate do
+describe Lotion::FormViewController::Delegate do
   subject do
-    include Lotion::Form::Delegate
+    include Lotion::FormViewController::Delegate
   end
 
   before do
