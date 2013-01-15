@@ -3,11 +3,14 @@ describe Lotion::Form do
   subject Lotion::Form do
     section 'Section One'
     def email
+      'email!'
     end
     def password
+      "password! #{rand}"
     end
     section 'Section Two'
     def username
+      'username!'
     end
   end
 
@@ -28,5 +31,11 @@ describe Lotion::Form do
   end
   it 'gives the second section one cell' do
     subject.data.second.count.should == 1
+  end
+  it 'provides access to the inputs by name' do
+    subject.inputs[ :email ].should == 'email!'
+  end
+  it 'caches the inputs in the #inputs hash' do
+    subject.inputs[ :password ].should == subject.inputs[ :password ]
   end
 end

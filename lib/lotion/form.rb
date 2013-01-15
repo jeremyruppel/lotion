@@ -6,14 +6,22 @@ module Lotion
     include Lotion::Actor
     include Lotion::UITableViewDataSource
 
+    ##
+    # The table data for this form.
     def data
       @data ||= self.class.sections
+    end
+
+    ##
+    # The inputs associated with this form by name.
+    def inputs
+      @inputs ||= Hash.new { |h, k| h[ k ] = send( k ) }
     end
 
     def tableView( tableView, cellForRowAtIndexPath:indexPath )
       # puts "TABLE VIEW CELL: #{reuseIdentifier} #{data[ indexPath ]}"
 
-      view = send( data[ indexPath ] )
+      view = inputs[ data[ indexPath ] ]
 
       cell = tableView.dequeueReusableCellWithIdentifier( reuseIdentifier ) || begin
         UITableViewCell.alloc.initWithStyle \
@@ -34,7 +42,7 @@ module Lotion
     def textFieldShouldReturn( textField )
       case textField.returnKeyType
       when UIReturnKeyType[ :next ]
-        if nextField = send( data.rows[ textField.tag.next ] )
+        if nextField = inputs[ data.rows[ textField.tag.next ] ]
           nextField.becomeFirstResponder
         else
           textField.resignFirstResponder
