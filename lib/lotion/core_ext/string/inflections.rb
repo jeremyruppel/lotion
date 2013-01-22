@@ -4,6 +4,10 @@ class String
     gsub( '::', '/' ).gsub( /([a-z])([A-Z])/, '\1_\2' ).downcase
   end
 
+  def camelize
+    capitalize.gsub( /_([a-zA-Z])/ ){ |m| $1.upcase }
+  end
+
   def demodulize
     split( '::' ).pop
   end

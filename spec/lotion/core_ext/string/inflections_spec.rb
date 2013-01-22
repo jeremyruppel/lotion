@@ -11,6 +11,16 @@ describe 'String#underscore' do
   end
 end
 
+describe 'String#camelize' do
+
+  it 'capitalizes a lowercase string' do
+    'foo'.camelize.should == 'Foo'
+  end
+  it 'camel-cases a string with underscores' do
+    'foo_bar'.camelize.should == 'FooBar'
+  end
+end
+
 describe 'String#demodulize' do
 
   it 'removes the module portion of a string' do
