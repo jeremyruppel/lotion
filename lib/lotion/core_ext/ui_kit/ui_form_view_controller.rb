@@ -4,7 +4,9 @@
 module Lotion
   module UIFormViewController
     extend Lotion::Concern
-    include Lotion::Actor
+    # FXME this isn't working because our concern implementation
+    # does not handle its own dependencies, namely class methods.
+    # include Lotion::Actor
     include Lotion::UITableViewDelegate
     include Lotion::UITextFieldDelegate
 

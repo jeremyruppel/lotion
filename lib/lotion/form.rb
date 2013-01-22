@@ -44,14 +44,8 @@ module Lotion
       cell
     end
 
-    # TODO [naming]
     def to_hash
-      hsh = { }
-      hsh[ concern ] = inputs.reduce( { } ) do |hsh, (key, input)|
-        hsh[ key ] = input.value
-        hsh
-      end
-      hsh
+      { concern => Hash[ inputs.map { |k, v| [ k, v.value ] } ].compact }
     end
 
     class << self
