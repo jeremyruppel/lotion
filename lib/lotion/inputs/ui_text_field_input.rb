@@ -1,12 +1,20 @@
-# require core_ext/ui_kit/ui_view
+# require input
+# require core_ext/ui_kit/ui_view_traits
 # require core_ext/ui_kit/ui_text_input_traits
 # require core_ext/ui_kit/ui_text_field_view_mode
 
-class UITextField
-
-  proxy do
+module Lotion
+  class UITextFieldInput < Lotion::Input
     include Lotion::UIViewTraits
     include Lotion::UITextInputTraits
+
+    def value
+      view.text
+    end
+
+    def view_class
+      UITextField
+    end
 
     ##
     # The string that is displayed when there is no other

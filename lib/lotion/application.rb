@@ -2,10 +2,8 @@
 # require core_ext/hash/reverse_merge
 # require core_ext/module/delegation
 # require core_ext/string/inflections
-# require core_ext/ui_kit/ui_button
 # require core_ext/ui_kit/ui_color
 # require core_ext/ui_kit/ui_form_view_controller
-# require core_ext/ui_kit/ui_text_field
 # require command
 # require concern
 # require enum

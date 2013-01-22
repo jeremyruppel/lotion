@@ -1,5 +1,7 @@
 # require core_ext/ui_kit/ui_table_view_data_source
 # require core_ext/ui_kit/ui_table_view_cell_style
+# require inputs/ui_button_input
+# require inputs/ui_text_field_input
 
 module Lotion
   class Form
@@ -26,7 +28,7 @@ module Lotion
       end
 
       # TODO in desperate need of refactor
-      case view = inputs[ data[ indexPath ] ]
+      case view = inputs[ data[ indexPath ] ].view
       when UITextField
         cell.accessoryView           = view
         cell.selectionStyle          = UITableViewCellSelectionStyleNone
@@ -44,9 +46,7 @@ module Lotion
     def to_hash
       hsh = { }
       hsh[ concern ] = inputs.reduce( { } ) do |hsh, (key, input)|
-        return hsh unless input.is_a?( UITextField )
-
-        hsh[ key ] = input.text
+        hsh[ key ] = input.value
         hsh
       end
       hsh
