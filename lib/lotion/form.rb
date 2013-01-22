@@ -8,6 +8,8 @@ module Lotion
     include Lotion::Actor
     include Lotion::UITableViewDataSource
 
+    abstract!
+
     ##
     # The table data for this form.
     def data

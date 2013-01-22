@@ -8,6 +8,8 @@ module Lotion
     include Lotion::UITableViewDelegate
     include Lotion::UITextFieldDelegate
 
+    abstract! 'ViewController'
+
     included do
       delegate :data, :inputs, :to => :form
     end

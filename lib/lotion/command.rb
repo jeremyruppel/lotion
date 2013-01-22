@@ -4,6 +4,8 @@ module Lotion
   class Command < Struct.new( :notification )
     include Lotion::Actor
 
+    abstract!
+
     delegate :name, :object, :userInfo, :to => :notification
 
     ##

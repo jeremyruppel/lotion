@@ -16,31 +16,31 @@ module Lotion
       UIApplication.sharedApplication.delegate
     end
 
-    ##
-    # The concern of this actor.
-    def concern
-      class_name[ /^(\w+)#{type}$/, 1 ].underscore
+    included do
+      delegate :class_name, :class_type, :concern, :to => :class
     end
 
-    ##
-    # The type of this actor.
-    # TODO avoid hard coding this and remove concrete dependencies
-    # on other framework classes.
-    def type
-      case self
-      when UIViewController
-        'ViewController'
-      when Lotion::Form
-        'Form'
-      when Lotion::Command
-        'Command'
+    module ClassMethods
+
+      ##
+      # The concern of this actor.
+      def concern
+        class_name[ /^(\w+)#{class_type}$/, 1 ].underscore
       end
-    end
 
-    ##
-    # The class name of this actor.
-    def class_name
-      self.class.to_s
+      ##
+      # The type of this actor.
+      # TODO avoid hard coding this and remove concrete dependencies
+      # on other framework classes.
+      def class_type
+        ancestors.find( &:abstract? ).abstract_type
+      end
+
+      ##
+      # The class name of this actor.
+      def class_name
+        to_s
+      end
     end
   end
 end
