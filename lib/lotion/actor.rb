@@ -7,7 +7,7 @@ module Lotion
     include Lotion::Notifications
 
     included do
-      delegate :bounds, :window, :views,  :to => :app
+      delegate :bounds, :logger, :window, :views,  :to => :app
     end
 
     ##

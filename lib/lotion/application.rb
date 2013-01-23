@@ -12,6 +12,7 @@
 # require form
 # require hash_extensions/indifferent_access
 # require hash_extensions/merge_initializer
+# require logger
 # require notifications
 
 module Lotion
@@ -46,6 +47,12 @@ module Lotion
     #
     def views
       @views ||= Hash.new { |h, k| h[ k ] = k.alloc.init }
+    end
+
+    ##
+    #
+    def logger
+      @logger ||= Lotion::Logger.new
     end
 
     ##

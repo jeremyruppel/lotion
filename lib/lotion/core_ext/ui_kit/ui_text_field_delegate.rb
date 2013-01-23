@@ -5,7 +5,7 @@ module Lotion
     def textFieldShouldReturn( textField )
       case textField.returnKeyType
       when UIReturnKeyType[ :next ]
-        if nextField = inputs[ data.rows[ textField.tag.next ] ]
+        if nextField = inputs[ data.rows[ textField.tag.next ] ].view
           nextField.becomeFirstResponder
         else
           textField.resignFirstResponder
