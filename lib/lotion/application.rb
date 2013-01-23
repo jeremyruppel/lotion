@@ -52,7 +52,7 @@ module Lotion
     ##
     #
     def logger
-      @logger ||= Lotion::Logger.new
+      @logger ||= Lotion::Logger.alloc
     end
 
     ##

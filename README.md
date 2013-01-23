@@ -32,7 +32,66 @@ Finally, include Lotion in your project by adding the following to your Rakefile
 
 ## Usage
 
-# TODO
+## Commands
+
+**Avoid doing any asynchronous work in your commands.**
+
+Commands are meant to represent one unit of work and are stateless.
+More practically, commands are garbage collected almost immediately,
+so attempting any asynchronous work can cause hard-to-debug errors.
+
+Consider this situation: We have a client that can fetch some user
+data and a command that tells the client to do so.
+
+``` ruby
+class FetchTweetsCommand < Lotion::Command
+
+  def call
+    app.twitter_client.fetch 'jeremyruppel' do |response|
+      notify 'tweets:fetched'
+    end
+  end
+end
+
+class TwitterClient
+
+  def fetch( username, &block )
+    # ... some async call here that eventually calls the block
+  end
+end
+```
+
+This is bound to cause problems because by the time the response
+comes back, the command has been garbage collected. The response
+in the block is still in memory, but the `notify` method is not.
+A more reliable approach would look like this:
+
+``` ruby
+class FetchTweetsCommand < Lotion::Command
+
+  def call
+    app.twitter_client.fetch 'jeremyruppel'
+  end
+end
+
+class TwitterClient
+  include Lotion::Actor
+
+  def fetch( username )
+    # ... some async call here that eventually calls the `success` lambda
+  end
+
+  def success
+    lambda do |response|
+      notify 'tweets:fetched'
+    end
+  end
+end
+```
+
+This works because the reference to the client is maintained. Our
+context is still notified of the response and we can still attach
+commands to the notification as we wish.
 
 ## Contributing
 
