@@ -35,6 +35,6 @@ module Lotion
   ##
   # Access to the current bundle.
   def self.bundle
-    @bundle ||= Bundle.new
+    @bundle ||= Bundle.alloc
   end
 end

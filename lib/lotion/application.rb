@@ -52,8 +52,14 @@ module Lotion
 
     ##
     #
+    def bundle
+      Lotion.bundle
+    end
+
+    ##
+    #
     def logger
-      @logger ||= Lotion::Logger.alloc
+      Lotion.logger
     end
 
     ##

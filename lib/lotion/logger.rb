@@ -26,4 +26,10 @@ module Lotion
       end
     end
   end
+
+  ##
+  # Access to the current logger.
+  def self.logger
+    @logger ||= Logger.alloc
+  end
 end
