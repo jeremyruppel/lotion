@@ -16,6 +16,18 @@ module Lotion
       UIApplication.sharedApplication.delegate
     end
 
+    # TODO this belongs somewhere else.
+    def alert( title, message )
+      view = UIAlertView.alloc.initWithTitle title,
+        message:           message,
+        delegate:          nil,
+        cancelButtonTitle: 'Ermagerd',
+        otherButtonTitles: nil
+      view.show
+      # TODO probably need to assign a delegate here
+      # and release this view when we're done.
+    end
+
     included do
       delegate :class_name, :class_type, :concern, :to => :class
     end

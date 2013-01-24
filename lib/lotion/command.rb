@@ -8,6 +8,8 @@ module Lotion
 
     delegate :name, :object, :userInfo, :to => :notification
 
+    alias :payload :userInfo
+
     ##
     #
     # TODO this could be a macro on Module
