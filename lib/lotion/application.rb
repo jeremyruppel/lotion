@@ -1,3 +1,4 @@
+# require bundle
 # require core_ext/array/access
 # require core_ext/hash/compact
 # require core_ext/hash/reverse_merge
