@@ -13,6 +13,7 @@
 # require form
 # require hash_extensions/indifferent_access
 # require hash_extensions/merge_initializer
+# require hash_extensions/method_access
 # require logger
 # require notifications
 
@@ -41,13 +42,14 @@ module Lotion
     #
     # TODO add :once => true option
     def on( name, command )
-      NSNotificationCenter.defaultCenter.addObserver command, selector:'call:', name:name, object:nil
+      NSNotificationCenter.defaultCenter.addObserver command,
+        selector:'call:', name:name, object:nil
     end
 
     ##
     #
     def views
-      @views ||= Hash.new { |h, k| h[ k ] = k.alloc.init }
+      Lotion.views
     end
 
     ##
@@ -67,5 +69,9 @@ module Lotion
     def application( application, didFinishLaunchingWithOptions:launchOptions )
       notify 'application:startup', launchOptions
     end
+  end
+
+  def self.views
+    @views ||= Hash.new { |h, k| h[ k ] = k.alloc.init }
   end
 end
