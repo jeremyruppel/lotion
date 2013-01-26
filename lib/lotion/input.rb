@@ -17,6 +17,10 @@ module Lotion
       raise NotImplementedError
     end
 
+    def clear!
+      raise NotImplementedError
+    end
+
     def build
       view_class.alloc
     end

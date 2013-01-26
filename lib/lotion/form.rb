@@ -22,6 +22,12 @@ module Lotion
       @inputs ||= Hash.new { |h, k| h[ k ] = send( k ) }
     end
 
+    ##
+    # Clears all of the inputs in this form.
+    def clear!
+      inputs.each_value &:clear!
+    end
+
     def tableView( tableView, cellForRowAtIndexPath:indexPath )
 
       cell = tableView.dequeueReusableCellWithIdentifier( reuseIdentifier ) || begin

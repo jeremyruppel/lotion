@@ -15,14 +15,17 @@ module Lotion
       # This can actually be fixed by making the UIControl itself
       # the target and creating our own delegate protocol.
 
+      # UPDATE looks like motion 1.31 may have fixed this bug!
+
       if caller.any? && caller.first.match( /(.+):(\d+):in `(\w+)'/ )
         # FIXME looks like Kernel#sprintf might be buggy.
         # Try that instead of interpolation here and you get:
         # malloc: *** error for object 0xa97a760: pointer
         # being freed was not allocated
-        puts "[#{$1}:#{$3}(#{$2})] #{message}"
+        puts "[%s:%s(%s)] %s" % [ $1, $3, $2, message ]
+        # puts "[#{$1}:#{$3}(#{$2})] #{message}"
       else
-        puts "[#{self.to_s}(anonymous)] #{message}"
+        puts "[(anonymous)] %s" % [ message ]
       end
     end
   end

@@ -3,6 +3,7 @@
 # require core_ext/ui_kit/ui_text_input_traits
 # require core_ext/ui_kit/ui_text_field_view_mode
 
+# TODO needs specs
 module Lotion
   class UITextFieldInput < Lotion::Input
     include Lotion::UIViewTraits
@@ -14,6 +15,10 @@ module Lotion
 
     def view_class
       UITextField
+    end
+
+    def clear!
+      view.setText nil
     end
 
     ##

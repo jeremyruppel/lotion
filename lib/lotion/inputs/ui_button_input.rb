@@ -3,6 +3,7 @@
 # require core_ext/ui_kit/ui_button_type
 # require core_ext/ui_kit/ui_control_state
 
+# TODO needs specs
 module Lotion
   class UIButtonInput < Lotion::Input
     include Lotion::UIViewTraits
@@ -13,6 +14,10 @@ module Lotion
 
     def view_class
       UIButton
+    end
+
+    def clear!
+      nil
     end
 
     ##
