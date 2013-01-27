@@ -1,6 +1,10 @@
 module Lotion
   class Input
 
+    attr_accessor :form
+
+    delegate :navigationController, :to => :form
+
     def initialize( options={} )
       options.each { |k, v| send( k, v ) }
     end
@@ -22,6 +26,7 @@ module Lotion
     end
 
     def build
+      # TODO alloc.init?
       view_class.alloc
     end
   end

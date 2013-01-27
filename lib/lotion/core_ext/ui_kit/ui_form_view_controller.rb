@@ -20,9 +20,13 @@ module Lotion
       super && initWithStyle( UITableViewStyleGrouped )
     end
 
-    # TODO not sure this should be here
-    # TODO [naming]
-    def submit
+    # ________ UIFormViewDelegate ________ #
+
+    def navigationController
+      super
+    end
+
+    def formDidSubmit( form )
       notify "#{concern}:submit", form.to_hash
     end
 
@@ -30,7 +34,7 @@ module Lotion
 
       def form( form_class )
         define_method :form do
-          @form ||= form_class.alloc
+          @form ||= form_class.alloc.initWithDelegate( self )
         end
       end
     end

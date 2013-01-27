@@ -20,6 +20,10 @@ module Lotion
       nil
     end
 
+    def build
+      view_class.buttonWithType UIButtonType[ :rounded_rect ]
+    end
+
     ##
     # Sets the title to use for the specified state.
     # @see UIControlState
@@ -32,6 +36,13 @@ module Lotion
     # @see UIControlState
     def title_color( color, state=:normal )
       view.setTitleColor color, forState:UIControlState[ state ]
+    end
+
+    ##
+    # Sets the image to use for the specified state.
+    # @see UIControlState
+    def image( image, state=:normal )
+      view.setImage image, forState:UIControlState[ state ]
     end
   end
 end

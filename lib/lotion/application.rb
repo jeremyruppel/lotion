@@ -71,6 +71,8 @@ module Lotion
     end
   end
 
+  # TODO **this is experimental**. Not sure if this should be public,
+  # but it's coming in pretty handy in debugging.
   def self.views
     @views ||= Hash.new { |h, k| h[ k ] = k.alloc.init }
   end

@@ -12,7 +12,7 @@ module Lotion
         end
       when UIReturnKeyType[ :go ]
         textField.resignFirstResponder
-        submit
+        form.submit!
       else
         false
       end

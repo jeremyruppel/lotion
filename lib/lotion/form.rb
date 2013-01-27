@@ -10,6 +10,15 @@ module Lotion
 
     abstract!
 
+    attr_accessor :delegate
+
+    delegate :navigationController, :to => :delegate
+
+    def initWithDelegate( delegate )
+      self.delegate = delegate
+      self
+    end
+
     ##
     # The table data for this form.
     def data
@@ -19,13 +28,25 @@ module Lotion
     ##
     # The inputs associated with this form by name.
     def inputs
-      @inputs ||= Hash.new { |h, k| h[ k ] = send( k ) }
+      @inputs ||= Hash.new do |h, k|
+        h[ k ] = send( k ).tap { |i| i.form = self }
+      end
     end
 
     ##
     # Clears all of the inputs in this form.
     def clear!
       inputs.each_value &:clear!
+    end
+
+    ##
+    #
+    def submit!
+      # TODO this may be a good candidate for a #try method,
+      # seems like that is the idiom ios delegates use.
+      if delegate && delegate.respond_to?( :formDidSubmit )
+        delegate.formDidSubmit self
+      end
     end
 
     def tableView( tableView, cellForRowAtIndexPath:indexPath )
@@ -42,9 +63,12 @@ module Lotion
         cell.selectionStyle          = UITableViewCellSelectionStyleNone
         view.delegate                = tableView.delegate
       when UIButton
-        cell.textLabel.text          = view.currentTitle
-        cell.textLabel.textAlignment = NSTextAlignmentCenter
-        cell.userInteractionEnabled  = view.enabled?
+        cell.backgroundView          = view
+        cell.selectionStyle          = UITableViewCellSelectionStyleNone
+        cell.contentView.userInteractionEnabled = false
+      when UIImageView
+        cell.backgroundView          = view
+        cell.selectionStyle          = UITableViewCellSelectionStyleNone
       end
 
       cell
