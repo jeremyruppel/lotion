@@ -67,7 +67,8 @@ module Lotion
         cell.selectionStyle          = UITableViewCellSelectionStyleNone
         cell.contentView.userInteractionEnabled = false
       when UIImageView
-        cell.backgroundView          = view
+        cell.imageView = view
+        # cell.backgroundView          = view
         cell.selectionStyle          = UITableViewCellSelectionStyleNone
       end
 

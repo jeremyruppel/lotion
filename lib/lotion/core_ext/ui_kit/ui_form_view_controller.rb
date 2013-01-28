@@ -26,7 +26,10 @@ module Lotion
       super
     end
 
+    # FIXME instead of delegate methods, could we use our
+    # own notification center? IOC, son!
     def formDidSubmit( form )
+      puts "FORM DID SUBMIT"
       notify "#{concern}:submit", form.to_hash
     end
 
