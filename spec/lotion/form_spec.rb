@@ -1,16 +1,18 @@
 describe Lotion::Form do
 
   subject Lotion::Form do
+    include Bacon::Double
+
     section 'Section One'
     def email
-      'email!'
+      double 'email input', :form= => true
     end
     def password
-      "password! #{rand}"
+      double 'password input', :form= => true
     end
     section 'Section Two'
     def username
-      'username!'
+      double 'username input', :form= => true
     end
   end
 
@@ -33,7 +35,7 @@ describe Lotion::Form do
     subject.data.second.count.should == 1
   end
   it 'provides access to the inputs by name' do
-    subject.inputs[ :email ].should == 'email!'
+    subject.inputs[ :email ].name.should == 'email input'
   end
   it 'caches the inputs in the #inputs hash' do
     subject.inputs[ :password ].should == subject.inputs[ :password ]
