@@ -1,48 +1,35 @@
 # require input
 # require core_ext/ui_kit/ui_view_traits
+# require core_ext/ui_kit/ui_button_traits
 # require core_ext/ui_kit/ui_button_type
-# require core_ext/ui_kit/ui_control_state
 
-# TODO needs specs
 module Lotion
   class UIButtonInput < Lotion::Input
     include Lotion::UIViewTraits
+    include Lotion::UIButtonTraits
 
+    ##
+    #
     def value
       nil
     end
 
+    ##
+    #
     def view_class
       UIButton
     end
 
+    ##
+    #
     def clear!
       nil
     end
 
+    ##
+    # By default, button inputs are rounded rect type buttons.
     def build
       view_class.buttonWithType UIButtonType[ :rounded_rect ]
-    end
-
-    ##
-    # Sets the title to use for the specified state.
-    # @see UIControlState
-    def title( string, state=:normal )
-      view.setTitle string, forState:UIControlState[ state ]
-    end
-
-    ##
-    # Sets the color of the title to use for the specified state.
-    # @see UIControlState
-    def title_color( color, state=:normal )
-      view.setTitleColor color, forState:UIControlState[ state ]
-    end
-
-    ##
-    # Sets the image to use for the specified state.
-    # @see UIControlState
-    def image( image, state=:normal )
-      view.setImage image, forState:UIControlState[ state ]
     end
   end
 end

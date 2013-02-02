@@ -21,6 +21,10 @@ module Lotion
       view.setText nil
     end
 
+    def text( value )
+      view.setText value
+    end
+
     ##
     # The string that is displayed when there is no other
     # text in the text field.
