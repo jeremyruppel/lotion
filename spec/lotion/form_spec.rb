@@ -43,4 +43,21 @@ describe Lotion::Form do
   it 'caches the inputs in the #inputs hash' do
     subject.inputs[ :password ].should == subject.inputs[ :password ]
   end
+
+  describe '#submit!' do
+    before do
+      subject.delegate = double 'delegate'
+    end
+
+    it 'calls #formDidSubmit if it passes validation' do
+      subject.delegate.mock! :formDidSubmit
+      subject.mock! :valid?, :return => true
+      subject.submit!.should == true
+    end
+    it 'calls #formDidFailValidation:withErrors if it fails validation' do
+      subject.delegate.mock! :'formDidFailValidation:withErrors'
+      subject.mock! :valid?, :return => false
+      subject.submit!.should == false
+    end
+  end
 end

@@ -1,9 +1,11 @@
+# require core_ext/object/try
+
 class Object
 
   ##
   # If the object is #empty? use that, otherwise check for falsiness.
   def blank?
-    respond_to?( :empty? ) ? empty? : !self
+    try( :empty? ) or !self
   end
 end
 

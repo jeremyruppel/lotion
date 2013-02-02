@@ -6,6 +6,7 @@
 # require core_ext/module/abstract
 # require core_ext/module/delegation
 # require core_ext/object/blank
+# require core_ext/object/try
 # require core_ext/string/inflections
 # require core_ext/ui_kit/ui_color
 # require core_ext/ui_kit/ui_form_view_controller

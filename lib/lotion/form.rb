@@ -45,11 +45,14 @@ module Lotion
     ##
     #
     def submit!
-      # TODO this may be a good candidate for a #try method,
-      # seems like that is the idiom ios delegates use.
-      if delegate && delegate.respond_to?( :formDidSubmit )
-        delegate.formDidSubmit self
+      # TODO calling the delegate methods feels more like a side effect.
+      # Look for a way to make this not the primary behavior.
+      if submitted = valid?
+        try( :delegate ).try :formDidSubmit, self
+      else
+        try( :delegate ).try :'formDidFailValidation:withErrors', self, errors
       end
+      submitted
     end
 
     def tableView( tableView, cellForRowAtIndexPath:indexPath )
