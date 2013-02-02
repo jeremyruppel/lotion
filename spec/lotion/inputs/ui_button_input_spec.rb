@@ -6,6 +6,7 @@ describe Lotion::UIButtonInput do
 
   it 'has the correct traits' do
     @subject.is_a?( Lotion::UIViewTraits ).should == true
+    @subject.is_a?( Lotion::UIControlTraits ).should == true
     @subject.is_a?( Lotion::UIButtonTraits ).should == true
   end
   it 'has the correct view class' do

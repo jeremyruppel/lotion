@@ -6,6 +6,7 @@
 module Lotion
   class UIButtonInput < Lotion::Input
     include Lotion::UIViewTraits
+    include Lotion::UIControlTraits
     include Lotion::UIButtonTraits
 
     ##

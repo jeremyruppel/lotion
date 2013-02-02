@@ -14,6 +14,7 @@ module Lotion
 
     delegate :navigationController, :to => :delegate
 
+    # TODO not in love with this pattern. is there something more elegant?
     def initWithDelegate( delegate )
       self.delegate = delegate
       self
@@ -75,21 +76,31 @@ module Lotion
       cell
     end
 
+    ##
+    # A hash representation of this form.
     def to_hash
       { concern => Hash[ inputs.map { |k, v| [ k, v.value ] } ].compact }
     end
 
     class << self
 
+      ##
+      # The sections for this form. Not part of the public API.
       def sections
         @sections ||= Lotion::NamedArray.new( to_s.underscore )
       end
 
+      ##
+      # Adds a section to this form, optionally with a name.
       def section( name=nil )
         sections << Lotion::NamedArray.new( name )
       end
 
+      ##
+      # Catches any methods defined on this form and adds them
+      # as inputs to the last section declared.
       def method_added( name )
+        # TODO consider making this only add public methods as inputs?
         sections.last << name
       end
     end

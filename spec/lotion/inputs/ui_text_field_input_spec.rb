@@ -6,6 +6,7 @@ describe Lotion::UITextFieldInput do
 
   it 'has the correct traits' do
     @subject.is_a?( Lotion::UIViewTraits ).should == true
+    @subject.is_a?( Lotion::UIControlTraits ).should == true
     @subject.is_a?( Lotion::UITextInputTraits ).should == true
     @subject.is_a?( Lotion::UITextFieldTraits ).should == true
   end

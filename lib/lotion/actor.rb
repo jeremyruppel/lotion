@@ -7,6 +7,9 @@ module Lotion
     include Lotion::Notifications
 
     included do
+      # TODO #bounds causes problems if a UIView wants to be an actor.
+      # Perhaps this should be a separate concern, or it could be
+      # removed since it isn't really proving itself useful anyhow.
       delegate :bounds, :logger, :window, :views,  :to => :app
     end
 
@@ -33,6 +36,8 @@ module Lotion
     end
 
     module ClassMethods
+
+      # TODO this should be its own concern, Lotion::Naming
 
       ##
       # The concern of this actor.
