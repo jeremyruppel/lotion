@@ -18,8 +18,7 @@ module Lotion
     ##
     #
     def validate( value, attribute, errors )
-      # TODO need to write #blank? and use that here
-      errors[ attribute ] << 'is blank' if value.nil?
+      errors[ attribute ] << 'is blank' if value.blank?
     end
   end
 end
