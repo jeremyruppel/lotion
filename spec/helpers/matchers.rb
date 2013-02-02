@@ -12,7 +12,7 @@ module Bacon
     #
     def delegate( methods={} )
       lambda { |subject|
-        methods.each do |((orig_method, *orig_args), (new_method, *new_args))|
+        methods.each do |((new_method, *new_args), (orig_method, *orig_args))|
           # FIXME make this not tied to #view as the receiver
           subject.view.mock! orig_method do |*args|
             args.should == orig_args

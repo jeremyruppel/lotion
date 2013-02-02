@@ -6,12 +6,12 @@ describe Lotion::UITextFieldTraits do
   before { subject.stub! :view, :return => double( 'view' ) }
 
   it 'delegates #text to the view' do
-    subject.should delegate [ :setText, :foo ] => [ :text, :foo ]
+    subject.should delegate [ :text, :foo ] => [ :setText, :foo ]
   end
   it 'delegates #placeholder to the view' do
-    subject.should delegate [ :setPlaceholder, :foo ] => [ :placeholder, :foo ]
+    subject.should delegate [ :placeholder, :foo ] => [ :setPlaceholder, :foo ]
   end
   it 'delegates #clear_button_mode to the view' do
-    subject.should delegate [ :setClearButtonMode, UITextFieldViewModeNever ] => [ :clear_button_mode, :never ]
+    subject.should delegate [ :clear_button_mode, :never ] => [ :setClearButtonMode, UITextFieldViewModeNever ]
   end
 end

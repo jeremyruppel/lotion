@@ -6,27 +6,27 @@ describe Lotion::UITextInputTraits do
   before { subject.stub! :view, :return => double( 'view' ) }
 
   it 'delegates #autocapitalization_type to the view' do
-    subject.should delegate [ :setAutocapitalizationType, UITextAutocapitalizationTypeNone ] => [ :autocapitalization_type, :none ]
+    subject.should delegate [ :autocapitalization_type, :none ] => [ :setAutocapitalizationType, UITextAutocapitalizationTypeNone ]
   end
   it 'delegates #autocorrection_type to the view' do
-    subject.should delegate [ :setAutocorrectionType, UITextAutocorrectionTypeDefault ] => [ :autocorrection_type, :default ]
+    subject.should delegate [ :autocorrection_type, :default ] => [ :setAutocorrectionType, UITextAutocorrectionTypeDefault ]
   end
   it 'delegates #enables_return_key_automatically to the view' do
-    subject.should delegate [ :setEnablesReturnKeyAutomatically, true ] => [ :enables_return_key_automatically, true ]
+    subject.should delegate [ :enables_return_key_automatically, true ] => [ :setEnablesReturnKeyAutomatically, true ]
   end
   it 'delegates #keyboard_appearance to the view' do
-    subject.should delegate [ :setKeyboardAppearance, UIKeyboardAppearanceDefault ] => [ :keyboard_appearance, :default ]
+    subject.should delegate [ :keyboard_appearance, :default ] => [ :setKeyboardAppearance, UIKeyboardAppearanceDefault ]
   end
   it 'delegates #keyboard_type to the view' do
-    subject.should delegate [ :setKeyboardType, UIKeyboardTypeDefault ] => [ :keyboard_type, :default ]
+    subject.should delegate [ :keyboard_type, :default ] => [ :setKeyboardType, UIKeyboardTypeDefault ]
   end
   it 'delegates #return_key_type to the view' do
-    subject.should delegate [ :setReturnKeyType, UIReturnKeyDefault ] => [ :return_key_type, :default ]
+    subject.should delegate [ :return_key_type, :default ] => [ :setReturnKeyType, UIReturnKeyDefault ]
   end
   it 'delegates #secure_text_entry to the view' do
-    subject.should delegate [ :setSecureTextEntry, true ] => [ :secure_text_entry, true ]
+    subject.should delegate [ :secure_text_entry, true ] => [ :setSecureTextEntry, true ]
   end
   it 'delegates #spell_checking_type to the view' do
-    subject.should delegate [ :setSpellCheckingType, UITextSpellCheckingTypeDefault ] => [ :spell_checking_type, :default ]
+    subject.should delegate [ :spell_checking_type, :default ] => [ :setSpellCheckingType, UITextSpellCheckingTypeDefault ]
   end
 end

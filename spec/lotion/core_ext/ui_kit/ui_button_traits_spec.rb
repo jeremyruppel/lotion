@@ -6,12 +6,12 @@ describe Lotion::UIButtonTraits do
   before { subject.stub! :view, :return => double( 'view' ) }
 
   it 'delegates #title to the view' do
-    subject.should delegate [ :'setTitle:forState', :foo, UIControlStateNormal ] => [ :title, :foo ]
+    subject.should delegate [ :title, :foo ] => [ :'setTitle:forState', :foo, UIControlStateNormal ]
   end
   it 'delegates #title_color to the view' do
-    subject.should delegate [ :'setTitleColor:forState', :foo, UIControlStateNormal ] => [ :title_color, :foo ]
+    subject.should delegate [ :title_color, :foo ] => [ :'setTitleColor:forState', :foo, UIControlStateNormal ]
   end
   it 'delegates #image to the view' do
-    subject.should delegate [ :'setImage:forState', :foo, UIControlStateNormal ] => [ :image, :foo ]
+    subject.should delegate [ :image, :foo ] => [ :'setImage:forState', :foo, UIControlStateNormal ]
   end
 end
