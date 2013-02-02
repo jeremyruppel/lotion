@@ -11,6 +11,19 @@ describe 'String#underscore' do
   end
 end
 
+describe 'String#classify' do
+
+  it 'upcases a string' do
+    'foo'.classify.should == 'Foo'
+  end
+  it 'removes underscores and capitalizes letters afterwards' do
+    'foo_bar'.classify.should == 'FooBar'
+  end
+  it 'converts "/" to "::"' do
+    'foo/bar'.classify.should == 'Foo::Bar'
+  end
+end
+
 describe 'String#camelize' do
 
   it 'capitalizes a lowercase string' do

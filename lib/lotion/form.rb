@@ -2,11 +2,13 @@
 # require core_ext/ui_kit/ui_table_view_cell_style
 # require inputs/ui_button_input
 # require inputs/ui_text_field_input
+# require validations
 
 module Lotion
   class Form
     include Lotion::Actor
     include Lotion::UITableViewDataSource
+    include Lotion::Validations
 
     abstract!
 

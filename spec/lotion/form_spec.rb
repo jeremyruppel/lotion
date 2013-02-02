@@ -19,6 +19,9 @@ describe Lotion::Form do
   it 'implements UITableViewDataSource' do
     subject.is_a?( Lotion::UITableViewDataSource ).should == true
   end
+  it 'includes validations' do
+    subject.is_a?( Lotion::Validations ).should == true
+  end
   it 'has two sections' do
     subject.data.count.should == 2
   end
