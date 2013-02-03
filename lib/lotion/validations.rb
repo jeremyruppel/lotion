@@ -1,4 +1,5 @@
 # require errors
+# require validators/length_validator
 # require validators/presence_validator
 
 module Lotion

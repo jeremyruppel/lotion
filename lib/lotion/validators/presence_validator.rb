@@ -1,19 +1,7 @@
-module Lotion
-  class PresenceValidator
+# require validator
 
-    # TODO move to superclass
-    def initialize( options={} )
-      @options = case options
-      when TrueClass
-        { }
-        # TODO probably want to set defaults here, like:
-        # { :allow_nil => false }
-      when Hash
-        options
-      else
-        # TODO probably want to raise an exception here
-      end
-    end
+module Lotion
+  class PresenceValidator < Validator
 
     ##
     #

@@ -36,7 +36,7 @@ module Lotion
     def formDidFailValidation( form, withErrors:errors )
       puts 'FORM DID FAIL VALIDATION'
       puts errors.inspect
-      alert 'Validation Fail', errors.inspect
+      alert 'Validation Fail', errors.full_messages.join( ', ' )
     end
 
     module ClassMethods
