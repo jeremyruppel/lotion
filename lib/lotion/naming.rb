@@ -1,4 +1,6 @@
 module Lotion
+  class NamingError < StandardError; end
+
   module Naming
 
     ##
@@ -6,6 +8,8 @@ module Lotion
     # an abstract class.
     def concern
       class_name[ /^(\w+)#{class_type}$/, 1 ].underscore
+    rescue NameError => e
+      raise Lotion::NamingError, "#concern cannot be inferred for #{class_name}"
     end
 
     ##
