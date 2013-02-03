@@ -4,6 +4,9 @@ describe Lotion::Input do
     @subject = described_class.new
   end
 
+  it 'includes the correct concerns' do
+    @subject.should be_a( Lotion::Naming )
+  end
   it 'expects subclasses to override #view_class' do
     lambda { @subject.view_class }.should.raise( NotImplementedError )
   end

@@ -11,7 +11,7 @@ module Lotion
       errors.clear
 
       self.class.validators.each do |attribute, list|
-        value = send( attribute )
+        value = read_attribute_for_validation( attribute )
 
         list.each do |validator|
           validator.validate value, attribute, errors
@@ -19,6 +19,13 @@ module Lotion
       end
 
       errors.empty?
+    end
+
+    ##
+    # Allows the validatable class to determine how to read
+    # attributes for validation.
+    def read_attribute_for_validation( attribute )
+      send( attribute )
     end
 
     ##

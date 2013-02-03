@@ -29,8 +29,14 @@ module Lotion
     # FIXME instead of delegate methods, could we use our
     # own notification center? IOC, son!
     def formDidSubmit( form )
-      puts "FORM DID SUBMIT"
+      puts 'FORM DID SUBMIT'
       notify "#{concern}:submit", form.to_hash
+    end
+
+    def formDidFailValidation( form, withErrors:errors )
+      puts 'FORM DID FAIL VALIDATION'
+      puts errors.inspect
+      alert 'Validation Fail', errors.inspect
     end
 
     module ClassMethods

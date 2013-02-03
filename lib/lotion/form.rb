@@ -46,7 +46,7 @@ module Lotion
     #
     def submit!
       # TODO calling the delegate methods feels more like a side effect.
-      # Look for a way to make this not the primary behavior.
+      # Look for a way to make this not the primary behavior. (callbacks!)
       if submitted = valid?
         try( :delegate ).try :formDidSubmit, self
       else
@@ -55,15 +55,33 @@ module Lotion
       submitted
     end
 
+    ##
+    # Override this method to validate values from the inputs
+    # instead of the inputs themselves.
+    def read_attribute_for_validation( attribute )
+      inputs[ attribute ].value
+    end
+
     def tableView( tableView, cellForRowAtIndexPath:indexPath )
 
-      cell = tableView.dequeueReusableCellWithIdentifier( reuseIdentifier ) || begin
+      # TODO use a per-input reuse identifier here
+      # Because we use the same reuse identifier for all inputs,
+      # sometimes they get confused. We should use an identifier
+      # base on the type of input cell.
+      # + make a Lotion::Naming concern
+      # + actors include Lotion::Naming
+      # + inputs include Lotion::Naming
+      # - use the input's reuse identifier instead of the form's
+      input = inputs[ data[ indexPath ] ]
+
+      # TODO should reuse_identifier be moved back onto the input?
+      cell = tableView.dequeueReusableCellWithIdentifier( input.concern ) || begin
         UITableViewCell.alloc.initWithStyle \
-          UITableViewCellStyle[ :default ], reuseIdentifier:reuseIdentifier
+          UITableViewCellStyle[ :default ], reuseIdentifier:input.concern
       end
 
       # TODO in desperate need of refactor
-      case view = inputs[ data[ indexPath ] ].view
+      case view = input.view
       when UITextField
         cell.accessoryView           = view
         cell.selectionStyle          = UITableViewCellSelectionStyleNone

@@ -37,6 +37,15 @@ describe Lotion::Form do
   end
 end
 
+describe Lotion::Input do
+  it 'is #abstract?' do
+    Lotion::Input.abstract?.should.not == nil
+  end
+  it 'has an #abstract_type' do
+    Lotion::Input.abstract_type.should == 'Input'
+  end
+end
+
 describe Lotion::UIFormViewController do
   it 'is #abstract?' do
     Lotion::UIFormViewController.abstract?.should.not == nil
