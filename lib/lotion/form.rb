@@ -63,15 +63,6 @@ module Lotion
     end
 
     def tableView( tableView, cellForRowAtIndexPath:indexPath )
-
-      # TODO use a per-input reuse identifier here
-      # Because we use the same reuse identifier for all inputs,
-      # sometimes they get confused. We should use an identifier
-      # base on the type of input cell.
-      # + make a Lotion::Naming concern
-      # + actors include Lotion::Naming
-      # + inputs include Lotion::Naming
-      # - use the input's reuse identifier instead of the form's
       input = inputs[ data[ indexPath ] ]
 
       # TODO should reuse_identifier be moved back onto the input?

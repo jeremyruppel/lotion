@@ -1,3 +1,4 @@
+# require errors
 # require validators/presence_validator
 
 module Lotion
@@ -31,7 +32,7 @@ module Lotion
     ##
     # A hash containing validation errors on this object.
     def errors
-      @errors ||= Hash.new { |h, k| h[ k ] = [ ] }
+      @errors ||= Lotion::Errors.new
     end
 
     module ClassMethods
