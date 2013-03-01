@@ -1,34 +1,34 @@
+# require inflector
+
 class String
 
   ##
   #
   def underscore
-    gsub( '::', '/' ).gsub( /([a-z])([A-Z])/, '\1_\2' ).downcase
+    Lotion::Inflector.underscore self
   end
 
   ##
   #
   def classify
-    camelize.gsub( /\/([a-zA-Z])/ ){ |m| "::#{$1.upcase}" }
+    Lotion::Inflector.classify self
   end
 
   ##
   #
   def camelize
-    capitalize.gsub( /_([a-zA-Z])/ ){ |m| $1.upcase }
+    Lotion::Inflector.camelize self
   end
 
   ##
   #
   def demodulize
-    split( '::' ).pop
+    Lotion::Inflector.demodulize self
   end
 
   ##
   #
   def constantize
-    split( '::' ).reduce( Kernel ) do |memo, name|
-      memo.const_get name
-    end
+    Lotion::Inflector.constantize self
   end
 end
