@@ -22,6 +22,12 @@ class String
 
   ##
   #
+  def pascalize
+    Lotion::Inflector.pascalize self
+  end
+
+  ##
+  #
   def demodulize
     Lotion::Inflector.demodulize self
   end

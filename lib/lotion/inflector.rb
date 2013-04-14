@@ -11,12 +11,18 @@ module Lotion
     ##
     #
     def classify( str )
-      camelize( str ).gsub( /\/([a-zA-Z])/ ){ |m| "::#{$1.upcase}" }
+      pascalize( str ).gsub( /\/([a-zA-Z])/ ){ |m| "::#{$1.upcase}" }
     end
 
     ##
     #
     def camelize( str )
+      str.gsub( /_([a-zA-Z])/ ){ |m| $1.upcase }
+    end
+
+    ##
+    #
+    def pascalize( str )
       str.capitalize.gsub( /_([a-zA-Z])/ ){ |m| $1.upcase }
     end
 

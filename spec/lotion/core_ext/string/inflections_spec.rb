@@ -26,11 +26,21 @@ end
 
 describe 'String#camelize' do
 
-  it 'capitalizes a lowercase string' do
-    'foo'.camelize.should == 'Foo'
+  it 'does not capitalize a lowercase string' do
+    'foo'.camelize.should == 'foo'
   end
   it 'camel-cases a string with underscores' do
-    'foo_bar'.camelize.should == 'FooBar'
+    'foo_bar'.camelize.should == 'fooBar'
+  end
+end
+
+describe 'String#pascalize' do
+
+  it 'capitalizes a lowercase string' do
+    'foo'.pascalize.should == 'Foo'
+  end
+  it 'pascal-cases a string with underscores' do
+    'foo_bar'.pascalize.should == 'FooBar'
   end
 end
 

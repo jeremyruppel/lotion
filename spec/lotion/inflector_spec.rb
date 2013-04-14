@@ -28,11 +28,31 @@ describe Lotion::Inflector do
 
   describe '.camelize' do
 
-    it 'capitalizes a lowercase string' do
-      Lotion::Inflector.camelize( 'foo' ).should == 'Foo'
+    it 'does not capitalize a lowercase string' do
+      Lotion::Inflector.camelize( 'foo' ).should == 'foo'
     end
     it 'camel-cases a string with underscores' do
-      Lotion::Inflector.camelize( 'foo_bar' ).should == 'FooBar'
+      Lotion::Inflector.camelize( 'foo_bar' ).should == 'fooBar'
+    end
+    it 'preserves method suffixes' do
+      Lotion::Inflector.camelize( 'foo=' ).should == 'foo='
+      Lotion::Inflector.camelize( 'foo!' ).should == 'foo!'
+      Lotion::Inflector.camelize( 'foo?' ).should == 'foo?'
+    end
+  end
+
+  describe '.pascalize' do
+
+    it 'capitalizes a lowercase string' do
+      Lotion::Inflector.pascalize( 'foo' ).should == 'Foo'
+    end
+    it 'pascal-cases a string with underscores' do
+      Lotion::Inflector.pascalize( 'foo_bar' ).should == 'FooBar'
+    end
+    it 'preserves method suffixes' do
+      Lotion::Inflector.pascalize( 'foo=' ).should == 'Foo='
+      Lotion::Inflector.pascalize( 'foo!' ).should == 'Foo!'
+      Lotion::Inflector.pascalize( 'foo?' ).should == 'Foo?'
     end
   end
 
