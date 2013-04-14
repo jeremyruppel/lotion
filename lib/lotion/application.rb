@@ -8,6 +8,7 @@
 # require core_ext/object/blank
 # require core_ext/object/try
 # require core_ext/string/inflections
+# require core_ext/string/to_url
 # require core_ext/ui_kit/ui_color
 # require core_ext/ui_kit/ui_form_view_controller
 # require command
