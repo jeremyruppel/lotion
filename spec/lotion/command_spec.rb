@@ -5,7 +5,7 @@ describe Lotion::Command do
   end
 
   it 'includes the correct concerns' do
-    subject.should be_a( Lotion::Actor )
+    subject.should be_a( Lotion::Notifications )
   end
   it 'responds to #notification' do
     subject.should.respond_to :notification
@@ -17,7 +17,7 @@ describe Lotion::Command do
 
     subject.name.should      == 'foo'
     subject.object.should    == 'bar'
-    subject.userInfo.should == 'baz'
+    subject.userInfo.should  == 'baz'
   end
   it 'treats .call as a factory method' do
     notification = mock :name, :return => 'foo'

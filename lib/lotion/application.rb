@@ -1,17 +1,9 @@
-# require core_ext/module/delegation
-# require core_ext/string/inflections
-# require command
-# require concern
-# require notifications
+#= require lotion/command
+#= require lotion/notifications
 
 module Lotion
   module Application
-    extend Lotion::Concern
     include Lotion::Notifications
-
-    included do
-      delegate :bounds, :to => :screen
-    end
 
     ##
     #
@@ -22,14 +14,15 @@ module Lotion
     ##
     #
     def window
-      @window ||= UIWindow.alloc.initWithFrame bounds
+      @window ||= UIWindow.alloc.initWithFrame screen.bounds
     end
 
     ##
     #
-    # TODO add :once => true option
+    # TODO add :once => true option?
     def on( name, command )
-      NSNotificationCenter.defaultCenter.addObserver command, selector:'call:', name:name, object:nil
+      NSNotificationCenter.defaultCenter.addObserver command,
+        selector:'call:', name:name, object:nil
     end
 
     ##

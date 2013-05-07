@@ -1,47 +1,26 @@
 require 'codependency'
-require 'pathname'
 
-module Lotion
-  class Project
-
-    ##
-    # The topologically sorted list of lotion dependencies, relative
-    # to the current working directory.
-    def files
-      @files ||= begin
-        graph.files.map { |file| relative_path_from( file ) }
-      end
-    end
-
-    ##
-    # The lotion dependency graph.
-    def graph
-      Codependency::Graph.new root
-    end
-
-    ##
-    # The absolute path to Lotion::Application.
-    def root
-      File.expand_path File.join( __FILE__, '../application.rb' )
-    end
-
-    ##
-    # Finds the relative path from the current working directory to the given
-    # file. Prepends a '.' if not present to help RubyMotion find files
-    # for our own test suite.
-    def relative_path_from( file )
-      path = Pathname( file ).relative_path_from( Pathname.pwd ).to_path
-      path[ /^\./ ] ? path : File.join( '.', path )
-    end
-  end
+unless defined?( Motion::Project::Config )
+  raise <<-EOS
+====================================================
+This file must be required in a RubyMotion Rakefile.
+====================================================
+  EOS
 end
 
-if defined?( ::Motion )
+Motion::Project::App.setup do |app|
+  graph = Codependency::Graph.new
 
-  Motion::Project::App.setup do |app|
-    lotion = Lotion::Project.new
+  graph.path << './app'
+  graph.path << './lib'
 
-    app.files += lotion.files
-    app.files_dependencies './app/app_delegate.rb' => lotion.files
-  end
+  graph.scan './app/**/*.rb'
+
+  # FIXME for some reason, app.spec_mode == false here,
+  # both in guard-motion and regular rake spec. wtf?
+  # Ideally, this line should only run if app.spec_mode
+  graph.scan File.join( app.specs_dir, '**/*.rb' )
+
+  app.files += graph.files
+  app.files_dependencies graph
 end

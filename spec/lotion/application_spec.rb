@@ -1,3 +1,5 @@
+#= require lotion/application
+
 describe Lotion::Application do
 
   before do
@@ -13,9 +15,6 @@ describe Lotion::Application do
   end
   it 'defines #screen' do
     subject.screen.should == UIScreen.mainScreen
-  end
-  it 'defines #bounds' do
-    subject.bounds.should be_a( CGRect )
   end
   it 'defines #window' do
     subject.window.should be_a( UIWindow )

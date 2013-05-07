@@ -1,10 +1,8 @@
-# require actor
+#= require lotion/notifications
 
 module Lotion
   class Command < Struct.new( :notification )
-    include Lotion::Actor
-
-    delegate :name, :object, :userInfo, :to => :notification
+    include Lotion::Notifications
 
     ##
     #
@@ -17,6 +15,24 @@ module Lotion
     #
     def self.call( notification )
       new( notification ).call
+    end
+
+    ##
+    # TODO delegate
+    def name
+      notification.name
+    end
+
+    ##
+    # TODO delegate
+    def object
+      notification.object
+    end
+
+    ##
+    # TODO delegate
+    def userInfo
+      notification.userInfo
     end
   end
 end
