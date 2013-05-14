@@ -2,7 +2,7 @@
 $:.unshift '/Library/RubyMotion/lib'
 $:.unshift 'lib'
 
-require 'motion/project'
+require 'motion/project/template/ios'
 require 'lotion/project'
 require 'lotion/version'
 
