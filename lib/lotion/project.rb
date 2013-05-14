@@ -1,26 +1,42 @@
-require 'codependency'
+require 'lotion'
 
-unless defined?( Motion::Project::Config )
-  raise <<-EOS
-====================================================
-This file must be required in a RubyMotion Rakefile.
-====================================================
-  EOS
+module Lotion
+  module Project
+
+    # FIXME remove once https://github.com/HipByte/RubyMotion/pull/90 merges
+    def files_dependencies(deps_hash)
+      res_path = lambda do |x|
+        path = /^\.{0,2}\//.match(x) ? x : File.join('.', x)
+        unless @files.flatten.include?(path)
+          App.fail "Can't resolve dependency `#{path}'"
+        end
+        path
+      end
+      deps_hash.each do |path, deps|
+        deps = [deps] unless deps.is_a?(Array)
+        @dependencies[res_path.call(path)] = deps.map(&res_path)
+      end
+    end
+  end
 end
 
-Motion::Project::App.setup do |app|
-  graph = Codependency::Graph.new
+Lotion.require do |graph|
 
-  graph.path << './app'
-  graph.path << './lib'
+  Motion::Project::App.setup do |app|
+    app.extend Lotion::Project
 
-  graph.scan './app/**/*.rb'
+    # Add the app dir to the search path
+    graph.path << './app'
 
-  # FIXME for some reason, app.spec_mode == false here,
-  # both in guard-motion and regular rake spec. wtf?
-  # Ideally, this line should only run if app.spec_mode
-  graph.scan File.join( app.specs_dir, '**/*.rb' )
+    # Scan the app dir for dependent files
+    graph.scan './app/**/*.rb'
 
-  app.files += graph.files
-  app.files_dependencies graph
+    # Scan the specs dir for dependent files
+    # FIXME add once https://github.com/HipByte/RubyMotion/pull/84 merges
+    graph.scan File.join( app.specs_dir, '**/*.rb' ) # if app.spec_mode
+
+    # Add the dependency graph to the app
+    app.files += graph.files
+    app.files_dependencies graph
+  end
 end
