@@ -1,8 +1,15 @@
 #= require lotion/notifications
 
 module Lotion
-  class Command < Struct.new( :notification )
+  class Command
     include Lotion::Notifications
+
+    ##
+    #
+    def initialize( notification )
+      @notification = notification
+    end
+    attr_reader :notification
 
     ##
     #
