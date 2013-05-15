@@ -20,7 +20,7 @@ module Lotion
     ##
     #
     def on( name, command )
-      NSNotificationCenter.defaultCenter.addObserver command,
+      notification_center.addObserver command,
         selector:'call:', name:name, object:nil
     end
 

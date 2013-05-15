@@ -2,14 +2,12 @@
 
 describe Lotion::Application do
 
-  before do
-    @center = NSNotificationCenter.defaultCenter
-  end
-
   subject do
     include Lotion::Application
   end
-
+  before do
+    @center = subject.notification_center
+  end
   it 'includes the correct concerns' do
     subject.should be_a( Lotion::Notifications )
   end

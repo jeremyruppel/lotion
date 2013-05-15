@@ -3,12 +3,13 @@ describe Lotion::Notifications do
   subject do
     include Lotion::Notifications
   end
-
   before do
-    @center = NSNotificationCenter.defaultCenter
+    @center = subject.notification_center
     @method = 'postNotificationName:object:userInfo'
   end
-
+  it 'has the correct notification center' do
+    subject.notification_center.should == NSNotificationCenter.defaultCenter
+  end
   it 'responds to #notify' do
     subject.should.respond_to :notify
   end
