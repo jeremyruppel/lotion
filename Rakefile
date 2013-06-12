@@ -14,3 +14,5 @@ Motion::Project::App.setup do |app|
   app.identifier = 'com.jeremyruppel.lotion.TestSuite'
   app.version    = Lotion::VERSION
 end
+
+require 'bundler/gem_tasks'
